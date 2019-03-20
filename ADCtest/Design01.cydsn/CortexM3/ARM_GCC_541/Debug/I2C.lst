@@ -1,0 +1,1524 @@
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.syntax unified
+  15              		.file	"I2C.c"
+  16              		.text
+  17              	.Ltext0:
+  18              		.cfi_sections	.debug_frame
+  19              		.section	.text.I2C_Init,"ax",%progbits
+  20              		.align	2
+  21              		.global	I2C_Init
+  22              		.thumb
+  23              		.thumb_func
+  24              		.type	I2C_Init, %function
+  25              	I2C_Init:
+  26              	.LFB0:
+  27              		.file 1 "Generated_Source\\PSoC5\\I2C.c"
+   1:Generated_Source\PSoC5/I2C.c **** /*******************************************************************************
+   2:Generated_Source\PSoC5/I2C.c **** * File Name: I2C.c
+   3:Generated_Source\PSoC5/I2C.c **** * Version 3.50
+   4:Generated_Source\PSoC5/I2C.c **** *
+   5:Generated_Source\PSoC5/I2C.c **** * Description:
+   6:Generated_Source\PSoC5/I2C.c **** *  This file provides the source code of APIs for the I2C component.
+   7:Generated_Source\PSoC5/I2C.c **** *  The actual protocol and operation code resides in the interrupt service
+   8:Generated_Source\PSoC5/I2C.c **** *  routine file.
+   9:Generated_Source\PSoC5/I2C.c **** *
+  10:Generated_Source\PSoC5/I2C.c **** *******************************************************************************
+  11:Generated_Source\PSoC5/I2C.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation. All rights reserved.
+  12:Generated_Source\PSoC5/I2C.c **** * You may use this file only in accordance with the license, terms, conditions,
+  13:Generated_Source\PSoC5/I2C.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  14:Generated_Source\PSoC5/I2C.c **** * the software package with which this file was provided.
+  15:Generated_Source\PSoC5/I2C.c **** *******************************************************************************/
+  16:Generated_Source\PSoC5/I2C.c **** 
+  17:Generated_Source\PSoC5/I2C.c **** #include "I2C_PVT.h"
+  18:Generated_Source\PSoC5/I2C.c **** 
+  19:Generated_Source\PSoC5/I2C.c **** 
+  20:Generated_Source\PSoC5/I2C.c **** /**********************************
+  21:Generated_Source\PSoC5/I2C.c **** *      System variables
+  22:Generated_Source\PSoC5/I2C.c **** **********************************/
+  23:Generated_Source\PSoC5/I2C.c **** 
+  24:Generated_Source\PSoC5/I2C.c **** uint8 I2C_initVar = 0u; /* Defines if component was initialized */
+  25:Generated_Source\PSoC5/I2C.c **** 
+  26:Generated_Source\PSoC5/I2C.c **** volatile uint8 I2C_state;  /* Current state of I2C FSM */
+  27:Generated_Source\PSoC5/I2C.c **** 
+  28:Generated_Source\PSoC5/I2C.c **** 
+  29:Generated_Source\PSoC5/I2C.c **** /*******************************************************************************
+  30:Generated_Source\PSoC5/I2C.c **** * Function Name: I2C_Init
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 2
+
+
+  31:Generated_Source\PSoC5/I2C.c **** ********************************************************************************
+  32:Generated_Source\PSoC5/I2C.c **** *
+  33:Generated_Source\PSoC5/I2C.c **** * Summary:
+  34:Generated_Source\PSoC5/I2C.c **** *  Initializes I2C registers with initial values provided from customizer.
+  35:Generated_Source\PSoC5/I2C.c **** *
+  36:Generated_Source\PSoC5/I2C.c **** * Parameters:
+  37:Generated_Source\PSoC5/I2C.c **** *  None.
+  38:Generated_Source\PSoC5/I2C.c **** *
+  39:Generated_Source\PSoC5/I2C.c **** * Return:
+  40:Generated_Source\PSoC5/I2C.c **** *  None.
+  41:Generated_Source\PSoC5/I2C.c **** *
+  42:Generated_Source\PSoC5/I2C.c **** * Global variables:
+  43:Generated_Source\PSoC5/I2C.c **** *  None.
+  44:Generated_Source\PSoC5/I2C.c **** *
+  45:Generated_Source\PSoC5/I2C.c **** * Reentrant:
+  46:Generated_Source\PSoC5/I2C.c **** *  No.
+  47:Generated_Source\PSoC5/I2C.c **** *
+  48:Generated_Source\PSoC5/I2C.c **** *******************************************************************************/
+  49:Generated_Source\PSoC5/I2C.c **** void I2C_Init(void) 
+  50:Generated_Source\PSoC5/I2C.c **** {
+  28              		.loc 1 50 0
+  29              		.cfi_startproc
+  30              		@ args = 0, pretend = 0, frame = 0
+  31              		@ frame_needed = 0, uses_anonymous_args = 0
+  32 0000 38B5     		push	{r3, r4, r5, lr}
+  33              		.cfi_def_cfa_offset 16
+  34              		.cfi_offset 3, -16
+  35              		.cfi_offset 4, -12
+  36              		.cfi_offset 5, -8
+  37              		.cfi_offset 14, -4
+  51:Generated_Source\PSoC5/I2C.c **** #if (I2C_FF_IMPLEMENTED)
+  52:Generated_Source\PSoC5/I2C.c ****     /* Configure fixed function block */
+  53:Generated_Source\PSoC5/I2C.c ****     I2C_CFG_REG  = I2C_DEFAULT_CFG;
+  38              		.loc 1 53 0
+  39 0002 0222     		movs	r2, #2
+  40 0004 114B     		ldr	r3, .L3
+  41 0006 1A70     		strb	r2, [r3]
+  54:Generated_Source\PSoC5/I2C.c ****     I2C_XCFG_REG = I2C_DEFAULT_XCFG;
+  42              		.loc 1 54 0
+  43 0008 8122     		movs	r2, #129
+  44 000a 0E3B     		subs	r3, r3, #14
+  45 000c 1A70     		strb	r2, [r3]
+  55:Generated_Source\PSoC5/I2C.c ****     I2C_ADDR_REG = I2C_DEFAULT_ADDR;
+  46              		.loc 1 55 0
+  47 000e 0822     		movs	r2, #8
+  48 0010 0233     		adds	r3, r3, #2
+  49 0012 1A70     		strb	r2, [r3]
+  56:Generated_Source\PSoC5/I2C.c ****     I2C_CLKDIV1_REG = LO8(I2C_DEFAULT_DIVIDE_FACTOR);
+  50              		.loc 1 56 0
+  51 0014 0F25     		movs	r5, #15
+  52 0016 1133     		adds	r3, r3, #17
+  53 0018 1D70     		strb	r5, [r3]
+  57:Generated_Source\PSoC5/I2C.c ****     I2C_CLKDIV2_REG = HI8(I2C_DEFAULT_DIVIDE_FACTOR);
+  54              		.loc 1 57 0
+  55 001a 0024     		movs	r4, #0
+  56 001c 0133     		adds	r3, r3, #1
+  57 001e 1C70     		strb	r4, [r3]
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 3
+
+
+  58:Generated_Source\PSoC5/I2C.c **** 
+  59:Generated_Source\PSoC5/I2C.c **** #else
+  60:Generated_Source\PSoC5/I2C.c ****     uint8 intState;
+  61:Generated_Source\PSoC5/I2C.c **** 
+  62:Generated_Source\PSoC5/I2C.c ****     /* Configure control and interrupt sources */
+  63:Generated_Source\PSoC5/I2C.c ****     I2C_CFG_REG      = I2C_DEFAULT_CFG;
+  64:Generated_Source\PSoC5/I2C.c ****     I2C_INT_MASK_REG = I2C_DEFAULT_INT_MASK;
+  65:Generated_Source\PSoC5/I2C.c **** 
+  66:Generated_Source\PSoC5/I2C.c ****     /* Enable interrupt generation in status */
+  67:Generated_Source\PSoC5/I2C.c ****     intState = CyEnterCriticalSection();
+  68:Generated_Source\PSoC5/I2C.c ****     I2C_INT_ENABLE_REG |= I2C_INTR_ENABLE;
+  69:Generated_Source\PSoC5/I2C.c ****     CyExitCriticalSection(intState);
+  70:Generated_Source\PSoC5/I2C.c **** 
+  71:Generated_Source\PSoC5/I2C.c ****     /* Configure bit counter */
+  72:Generated_Source\PSoC5/I2C.c ****     #if (I2C_MODE_SLAVE_ENABLED)
+  73:Generated_Source\PSoC5/I2C.c ****         I2C_PERIOD_REG = I2C_DEFAULT_PERIOD;
+  74:Generated_Source\PSoC5/I2C.c ****     #endif  /* (I2C_MODE_SLAVE_ENABLED) */
+  75:Generated_Source\PSoC5/I2C.c **** 
+  76:Generated_Source\PSoC5/I2C.c ****     /* Configure clock generator */
+  77:Generated_Source\PSoC5/I2C.c ****     #if (I2C_MODE_MASTER_ENABLED)
+  78:Generated_Source\PSoC5/I2C.c ****         I2C_MCLK_PRD_REG = I2C_DEFAULT_MCLK_PRD;
+  79:Generated_Source\PSoC5/I2C.c ****         I2C_MCLK_CMP_REG = I2C_DEFAULT_MCLK_CMP;
+  80:Generated_Source\PSoC5/I2C.c ****     #endif /* (I2C_MODE_MASTER_ENABLED) */
+  81:Generated_Source\PSoC5/I2C.c **** #endif /* (I2C_FF_IMPLEMENTED) */
+  82:Generated_Source\PSoC5/I2C.c **** 
+  83:Generated_Source\PSoC5/I2C.c **** #if (I2C_TIMEOUT_ENABLED)
+  84:Generated_Source\PSoC5/I2C.c ****     I2C_TimeoutInit();
+  85:Generated_Source\PSoC5/I2C.c **** #endif /* (I2C_TIMEOUT_ENABLED) */
+  86:Generated_Source\PSoC5/I2C.c **** 
+  87:Generated_Source\PSoC5/I2C.c ****     /* Configure internal interrupt */
+  88:Generated_Source\PSoC5/I2C.c ****     CyIntDisable    (I2C_ISR_NUMBER);
+  58              		.loc 1 88 0
+  59 0020 4FF40042 		mov	r2, #32768
+  60 0024 0A4B     		ldr	r3, .L3+4
+  61 0026 1A60     		str	r2, [r3]
+  89:Generated_Source\PSoC5/I2C.c ****     CyIntSetPriority(I2C_ISR_NUMBER, I2C_ISR_PRIORITY);
+  62              		.loc 1 89 0
+  63 0028 0721     		movs	r1, #7
+  64 002a 2846     		mov	r0, r5
+  65 002c FFF7FEFF 		bl	CyIntSetPriority
+  66              	.LVL0:
+  90:Generated_Source\PSoC5/I2C.c ****     #if (I2C_INTERN_I2C_INTR_HANDLER)
+  91:Generated_Source\PSoC5/I2C.c ****         (void) CyIntSetVector(I2C_ISR_NUMBER, &I2C_ISR);
+  67              		.loc 1 91 0
+  68 0030 0849     		ldr	r1, .L3+8
+  69 0032 2846     		mov	r0, r5
+  70 0034 FFF7FEFF 		bl	CyIntSetVector
+  71              	.LVL1:
+  92:Generated_Source\PSoC5/I2C.c ****     #endif /* (I2C_INTERN_I2C_INTR_HANDLER) */
+  93:Generated_Source\PSoC5/I2C.c **** 
+  94:Generated_Source\PSoC5/I2C.c ****     /* Set FSM to default state */
+  95:Generated_Source\PSoC5/I2C.c ****     I2C_state = I2C_SM_IDLE;
+  72              		.loc 1 95 0
+  73 0038 1022     		movs	r2, #16
+  74 003a 074B     		ldr	r3, .L3+12
+  75 003c 1A70     		strb	r2, [r3]
+  96:Generated_Source\PSoC5/I2C.c **** 
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 4
+
+
+  97:Generated_Source\PSoC5/I2C.c **** #if (I2C_MODE_SLAVE_ENABLED)
+  98:Generated_Source\PSoC5/I2C.c ****     /* Clear status and buffers index */
+  99:Generated_Source\PSoC5/I2C.c ****     I2C_slStatus = 0u;
+ 100:Generated_Source\PSoC5/I2C.c ****     I2C_slRdBufIndex = 0u;
+ 101:Generated_Source\PSoC5/I2C.c ****     I2C_slWrBufIndex = 0u;
+ 102:Generated_Source\PSoC5/I2C.c **** 
+ 103:Generated_Source\PSoC5/I2C.c ****     /* Configure matched address */
+ 104:Generated_Source\PSoC5/I2C.c ****     I2C_SlaveSetAddress(I2C_DEFAULT_ADDR);
+ 105:Generated_Source\PSoC5/I2C.c **** #endif /* (I2C_MODE_SLAVE_ENABLED) */
+ 106:Generated_Source\PSoC5/I2C.c **** 
+ 107:Generated_Source\PSoC5/I2C.c **** #if (I2C_MODE_MASTER_ENABLED)
+ 108:Generated_Source\PSoC5/I2C.c ****     /* Clear status and buffers index */
+ 109:Generated_Source\PSoC5/I2C.c ****     I2C_mstrStatus = 0u;
+  76              		.loc 1 109 0
+  77 003e 074B     		ldr	r3, .L3+16
+  78 0040 1C70     		strb	r4, [r3]
+ 110:Generated_Source\PSoC5/I2C.c ****     I2C_mstrRdBufIndex = 0u;
+  79              		.loc 1 110 0
+  80 0042 074B     		ldr	r3, .L3+20
+  81 0044 1C70     		strb	r4, [r3]
+ 111:Generated_Source\PSoC5/I2C.c ****     I2C_mstrWrBufIndex = 0u;
+  82              		.loc 1 111 0
+  83 0046 074B     		ldr	r3, .L3+24
+  84 0048 1C70     		strb	r4, [r3]
+  85 004a 38BD     		pop	{r3, r4, r5, pc}
+  86              	.L4:
+  87              		.align	2
+  88              	.L3:
+  89 004c D6490040 		.word	1073760726
+  90 0050 80E100E0 		.word	-536813184
+  91 0054 00000000 		.word	I2C_ISR
+  92 0058 00000000 		.word	I2C_state
+  93 005c 00000000 		.word	I2C_mstrStatus
+  94 0060 00000000 		.word	I2C_mstrRdBufIndex
+  95 0064 00000000 		.word	I2C_mstrWrBufIndex
+  96              		.cfi_endproc
+  97              	.LFE0:
+  98              		.size	I2C_Init, .-I2C_Init
+  99              		.section	.text.I2C_Enable,"ax",%progbits
+ 100              		.align	2
+ 101              		.global	I2C_Enable
+ 102              		.thumb
+ 103              		.thumb_func
+ 104              		.type	I2C_Enable, %function
+ 105              	I2C_Enable:
+ 106              	.LFB1:
+ 112:Generated_Source\PSoC5/I2C.c **** #endif /* (I2C_MODE_MASTER_ENABLED) */
+ 113:Generated_Source\PSoC5/I2C.c **** }
+ 114:Generated_Source\PSoC5/I2C.c **** 
+ 115:Generated_Source\PSoC5/I2C.c **** 
+ 116:Generated_Source\PSoC5/I2C.c **** /*******************************************************************************
+ 117:Generated_Source\PSoC5/I2C.c **** * Function Name: I2C_Enable
+ 118:Generated_Source\PSoC5/I2C.c **** ********************************************************************************
+ 119:Generated_Source\PSoC5/I2C.c **** *
+ 120:Generated_Source\PSoC5/I2C.c **** * Summary:
+ 121:Generated_Source\PSoC5/I2C.c **** *  Enables I2C operations.
+ 122:Generated_Source\PSoC5/I2C.c **** *
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 5
+
+
+ 123:Generated_Source\PSoC5/I2C.c **** * Parameters:
+ 124:Generated_Source\PSoC5/I2C.c **** *  None.
+ 125:Generated_Source\PSoC5/I2C.c **** *
+ 126:Generated_Source\PSoC5/I2C.c **** * Return:
+ 127:Generated_Source\PSoC5/I2C.c **** *  None.
+ 128:Generated_Source\PSoC5/I2C.c **** *
+ 129:Generated_Source\PSoC5/I2C.c **** * Global variables:
+ 130:Generated_Source\PSoC5/I2C.c **** *  None.
+ 131:Generated_Source\PSoC5/I2C.c **** *
+ 132:Generated_Source\PSoC5/I2C.c **** *******************************************************************************/
+ 133:Generated_Source\PSoC5/I2C.c **** void I2C_Enable(void) 
+ 134:Generated_Source\PSoC5/I2C.c **** {
+ 107              		.loc 1 134 0
+ 108              		.cfi_startproc
+ 109              		@ args = 0, pretend = 0, frame = 0
+ 110              		@ frame_needed = 0, uses_anonymous_args = 0
+ 111 0000 08B5     		push	{r3, lr}
+ 112              		.cfi_def_cfa_offset 8
+ 113              		.cfi_offset 3, -8
+ 114              		.cfi_offset 14, -4
+ 135:Generated_Source\PSoC5/I2C.c **** #if (I2C_FF_IMPLEMENTED)
+ 136:Generated_Source\PSoC5/I2C.c ****     uint8 intState;
+ 137:Generated_Source\PSoC5/I2C.c **** 
+ 138:Generated_Source\PSoC5/I2C.c ****     /* Enable power to block */
+ 139:Generated_Source\PSoC5/I2C.c ****     intState = CyEnterCriticalSection();
+ 115              		.loc 1 139 0
+ 116 0002 FFF7FEFF 		bl	CyEnterCriticalSection
+ 117              	.LVL2:
+ 140:Generated_Source\PSoC5/I2C.c ****     I2C_ACT_PWRMGR_REG  |= I2C_ACT_PWR_EN;
+ 118              		.loc 1 140 0
+ 119 0006 064A     		ldr	r2, .L7
+ 120 0008 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 121 000a 43F00403 		orr	r3, r3, #4
+ 122 000e 1370     		strb	r3, [r2]
+ 141:Generated_Source\PSoC5/I2C.c ****     I2C_STBY_PWRMGR_REG |= I2C_STBY_PWR_EN;
+ 123              		.loc 1 141 0
+ 124 0010 1032     		adds	r2, r2, #16
+ 125 0012 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 126 0014 43F00403 		orr	r3, r3, #4
+ 127 0018 1370     		strb	r3, [r2]
+ 142:Generated_Source\PSoC5/I2C.c ****     CyExitCriticalSection(intState);
+ 128              		.loc 1 142 0
+ 129 001a FFF7FEFF 		bl	CyExitCriticalSection
+ 130              	.LVL3:
+ 131 001e 08BD     		pop	{r3, pc}
+ 132              	.L8:
+ 133              		.align	2
+ 134              	.L7:
+ 135 0020 A5430040 		.word	1073759141
+ 136              		.cfi_endproc
+ 137              	.LFE1:
+ 138              		.size	I2C_Enable, .-I2C_Enable
+ 139              		.section	.text.I2C_Start,"ax",%progbits
+ 140              		.align	2
+ 141              		.global	I2C_Start
+ 142              		.thumb
+ 143              		.thumb_func
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 6
+
+
+ 144              		.type	I2C_Start, %function
+ 145              	I2C_Start:
+ 146              	.LFB2:
+ 143:Generated_Source\PSoC5/I2C.c **** #else
+ 144:Generated_Source\PSoC5/I2C.c ****     #if (I2C_MODE_SLAVE_ENABLED)
+ 145:Generated_Source\PSoC5/I2C.c ****         /* Enable bit counter */
+ 146:Generated_Source\PSoC5/I2C.c ****         uint8 intState = CyEnterCriticalSection();
+ 147:Generated_Source\PSoC5/I2C.c ****         I2C_COUNTER_AUX_CTL_REG |= I2C_CNT7_ENABLE;
+ 148:Generated_Source\PSoC5/I2C.c ****         CyExitCriticalSection(intState);
+ 149:Generated_Source\PSoC5/I2C.c ****     #endif /* (I2C_MODE_SLAVE_ENABLED) */
+ 150:Generated_Source\PSoC5/I2C.c **** 
+ 151:Generated_Source\PSoC5/I2C.c ****     /* Enable slave or master bits */
+ 152:Generated_Source\PSoC5/I2C.c ****     I2C_CFG_REG |= I2C_ENABLE_MS;
+ 153:Generated_Source\PSoC5/I2C.c **** #endif /* (I2C_FF_IMPLEMENTED) */
+ 154:Generated_Source\PSoC5/I2C.c **** 
+ 155:Generated_Source\PSoC5/I2C.c **** #if (I2C_TIMEOUT_ENABLED)
+ 156:Generated_Source\PSoC5/I2C.c ****     I2C_TimeoutEnable();
+ 157:Generated_Source\PSoC5/I2C.c **** #endif /* (I2C_TIMEOUT_ENABLED) */
+ 158:Generated_Source\PSoC5/I2C.c **** }
+ 159:Generated_Source\PSoC5/I2C.c **** 
+ 160:Generated_Source\PSoC5/I2C.c **** 
+ 161:Generated_Source\PSoC5/I2C.c **** /*******************************************************************************
+ 162:Generated_Source\PSoC5/I2C.c **** * Function Name: I2C_Start
+ 163:Generated_Source\PSoC5/I2C.c **** ********************************************************************************
+ 164:Generated_Source\PSoC5/I2C.c **** *
+ 165:Generated_Source\PSoC5/I2C.c **** * Summary:
+ 166:Generated_Source\PSoC5/I2C.c **** *  Starts the I2C hardware. Enables Active mode power template bits or clock
+ 167:Generated_Source\PSoC5/I2C.c **** *  gating as appropriate. It is required to be executed before I2C bus
+ 168:Generated_Source\PSoC5/I2C.c **** *  operation.
+ 169:Generated_Source\PSoC5/I2C.c **** *
+ 170:Generated_Source\PSoC5/I2C.c **** * Parameters:
+ 171:Generated_Source\PSoC5/I2C.c **** *  None.
+ 172:Generated_Source\PSoC5/I2C.c **** *
+ 173:Generated_Source\PSoC5/I2C.c **** * Return:
+ 174:Generated_Source\PSoC5/I2C.c **** *  None.
+ 175:Generated_Source\PSoC5/I2C.c **** *
+ 176:Generated_Source\PSoC5/I2C.c **** * Side Effects:
+ 177:Generated_Source\PSoC5/I2C.c **** *  This component automatically enables its interrupt.  If I2C is enabled !
+ 178:Generated_Source\PSoC5/I2C.c **** *  without the interrupt enabled, it can lock up the I2C bus.
+ 179:Generated_Source\PSoC5/I2C.c **** *
+ 180:Generated_Source\PSoC5/I2C.c **** * Global variables:
+ 181:Generated_Source\PSoC5/I2C.c **** *  I2C_initVar - This variable is used to check the initial
+ 182:Generated_Source\PSoC5/I2C.c **** *                             configuration, modified on the first
+ 183:Generated_Source\PSoC5/I2C.c **** *                             function call.
+ 184:Generated_Source\PSoC5/I2C.c **** *
+ 185:Generated_Source\PSoC5/I2C.c **** * Reentrant:
+ 186:Generated_Source\PSoC5/I2C.c **** *  No.
+ 187:Generated_Source\PSoC5/I2C.c **** *
+ 188:Generated_Source\PSoC5/I2C.c **** *******************************************************************************/
+ 189:Generated_Source\PSoC5/I2C.c **** void I2C_Start(void) 
+ 190:Generated_Source\PSoC5/I2C.c **** {
+ 147              		.loc 1 190 0
+ 148              		.cfi_startproc
+ 149              		@ args = 0, pretend = 0, frame = 0
+ 150              		@ frame_needed = 0, uses_anonymous_args = 0
+ 151 0000 08B5     		push	{r3, lr}
+ 152              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 7
+
+
+ 153              		.cfi_offset 3, -8
+ 154              		.cfi_offset 14, -4
+ 191:Generated_Source\PSoC5/I2C.c ****     if (0u == I2C_initVar)
+ 155              		.loc 1 191 0
+ 156 0002 074B     		ldr	r3, .L12
+ 157 0004 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 158 0006 23B9     		cbnz	r3, .L10
+ 192:Generated_Source\PSoC5/I2C.c ****     {
+ 193:Generated_Source\PSoC5/I2C.c ****         I2C_Init();
+ 159              		.loc 1 193 0
+ 160 0008 FFF7FEFF 		bl	I2C_Init
+ 161              	.LVL4:
+ 194:Generated_Source\PSoC5/I2C.c ****         I2C_initVar = 1u; /* Component initialized */
+ 162              		.loc 1 194 0
+ 163 000c 0122     		movs	r2, #1
+ 164 000e 044B     		ldr	r3, .L12
+ 165 0010 1A70     		strb	r2, [r3]
+ 166              	.L10:
+ 195:Generated_Source\PSoC5/I2C.c ****     }
+ 196:Generated_Source\PSoC5/I2C.c **** 
+ 197:Generated_Source\PSoC5/I2C.c ****     I2C_Enable();
+ 167              		.loc 1 197 0
+ 168 0012 FFF7FEFF 		bl	I2C_Enable
+ 169              	.LVL5:
+ 198:Generated_Source\PSoC5/I2C.c ****     I2C_EnableInt();
+ 170              		.loc 1 198 0
+ 171 0016 4FF40042 		mov	r2, #32768
+ 172 001a 024B     		ldr	r3, .L12+4
+ 173 001c 1A60     		str	r2, [r3]
+ 174 001e 08BD     		pop	{r3, pc}
+ 175              	.L13:
+ 176              		.align	2
+ 177              	.L12:
+ 178 0020 00000000 		.word	.LANCHOR0
+ 179 0024 00E100E0 		.word	-536813312
+ 180              		.cfi_endproc
+ 181              	.LFE2:
+ 182              		.size	I2C_Start, .-I2C_Start
+ 183              		.section	.text.I2C_Stop,"ax",%progbits
+ 184              		.align	2
+ 185              		.global	I2C_Stop
+ 186              		.thumb
+ 187              		.thumb_func
+ 188              		.type	I2C_Stop, %function
+ 189              	I2C_Stop:
+ 190              	.LFB3:
+ 199:Generated_Source\PSoC5/I2C.c **** }
+ 200:Generated_Source\PSoC5/I2C.c **** 
+ 201:Generated_Source\PSoC5/I2C.c **** 
+ 202:Generated_Source\PSoC5/I2C.c **** /*******************************************************************************
+ 203:Generated_Source\PSoC5/I2C.c **** * Function Name: I2C_Stop
+ 204:Generated_Source\PSoC5/I2C.c **** ********************************************************************************
+ 205:Generated_Source\PSoC5/I2C.c **** *
+ 206:Generated_Source\PSoC5/I2C.c **** * Summary:
+ 207:Generated_Source\PSoC5/I2C.c **** *  Disables I2C hardware and disables I2C interrupt. Disables Active mode power
+ 208:Generated_Source\PSoC5/I2C.c **** *  template bits or clock gating as appropriate.
+ 209:Generated_Source\PSoC5/I2C.c **** *
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 8
+
+
+ 210:Generated_Source\PSoC5/I2C.c **** * Parameters:
+ 211:Generated_Source\PSoC5/I2C.c **** *  None.
+ 212:Generated_Source\PSoC5/I2C.c **** *
+ 213:Generated_Source\PSoC5/I2C.c **** * Return:
+ 214:Generated_Source\PSoC5/I2C.c **** *  None.
+ 215:Generated_Source\PSoC5/I2C.c **** *
+ 216:Generated_Source\PSoC5/I2C.c **** *******************************************************************************/
+ 217:Generated_Source\PSoC5/I2C.c **** void I2C_Stop(void) 
+ 218:Generated_Source\PSoC5/I2C.c **** {
+ 191              		.loc 1 218 0
+ 192              		.cfi_startproc
+ 193              		@ args = 0, pretend = 0, frame = 0
+ 194              		@ frame_needed = 0, uses_anonymous_args = 0
+ 195 0000 2DE9F843 		push	{r3, r4, r5, r6, r7, r8, r9, lr}
+ 196              		.cfi_def_cfa_offset 32
+ 197              		.cfi_offset 3, -32
+ 198              		.cfi_offset 4, -28
+ 199              		.cfi_offset 5, -24
+ 200              		.cfi_offset 6, -20
+ 201              		.cfi_offset 7, -16
+ 202              		.cfi_offset 8, -12
+ 203              		.cfi_offset 9, -8
+ 204              		.cfi_offset 14, -4
+ 219:Generated_Source\PSoC5/I2C.c ****     I2C_DisableInt();
+ 205              		.loc 1 219 0
+ 206 0004 4FF40049 		mov	r9, #32768
+ 207 0008 214B     		ldr	r3, .L16
+ 208 000a C3F80090 		str	r9, [r3]
+ 209              	.LBB2:
+ 220:Generated_Source\PSoC5/I2C.c **** 
+ 221:Generated_Source\PSoC5/I2C.c **** #if (I2C_TIMEOUT_ENABLED)
+ 222:Generated_Source\PSoC5/I2C.c ****     I2C_TimeoutStop();
+ 223:Generated_Source\PSoC5/I2C.c **** #endif  /* End (I2C_TIMEOUT_ENABLED) */
+ 224:Generated_Source\PSoC5/I2C.c **** 
+ 225:Generated_Source\PSoC5/I2C.c **** #if (I2C_FF_IMPLEMENTED)
+ 226:Generated_Source\PSoC5/I2C.c ****     {
+ 227:Generated_Source\PSoC5/I2C.c ****         uint8 intState;
+ 228:Generated_Source\PSoC5/I2C.c ****         uint16 blockResetCycles;
+ 229:Generated_Source\PSoC5/I2C.c **** 
+ 230:Generated_Source\PSoC5/I2C.c ****         /* Store registers effected by block disable */
+ 231:Generated_Source\PSoC5/I2C.c ****         I2C_backup.addr    = I2C_ADDR_REG;
+ 210              		.loc 1 231 0
+ 211 000e DFF8A080 		ldr	r8, .L16+32
+ 212 0012 98F80030 		ldrb	r3, [r8]	@ zero_extendqisi2
+ 213 0016 1F4C     		ldr	r4, .L16+4
+ 214 0018 E370     		strb	r3, [r4, #3]
+ 232:Generated_Source\PSoC5/I2C.c ****         I2C_backup.clkDiv1 = I2C_CLKDIV1_REG;
+ 215              		.loc 1 232 0
+ 216 001a 1F4F     		ldr	r7, .L16+8
+ 217 001c 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 218 001e 2371     		strb	r3, [r4, #4]
+ 233:Generated_Source\PSoC5/I2C.c ****         I2C_backup.clkDiv2 = I2C_CLKDIV2_REG;
+ 219              		.loc 1 233 0
+ 220 0020 1E4E     		ldr	r6, .L16+12
+ 221 0022 3378     		ldrb	r3, [r6]	@ zero_extendqisi2
+ 222 0024 6371     		strb	r3, [r4, #5]
+ 234:Generated_Source\PSoC5/I2C.c **** 
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 9
+
+
+ 235:Generated_Source\PSoC5/I2C.c ****         /* Calculate number of cycles to reset block */
+ 236:Generated_Source\PSoC5/I2C.c ****         blockResetCycles = ((uint16) ((uint16) I2C_CLKDIV2_REG << 8u) | I2C_CLKDIV1_REG) + 1u;
+ 223              		.loc 1 236 0
+ 224 0026 3078     		ldrb	r0, [r6]	@ zero_extendqisi2
+ 225 0028 3B78     		ldrb	r3, [r7]	@ zero_extendqisi2
+ 226 002a 43EA0020 		orr	r0, r3, r0, lsl #8
+ 227 002e 0130     		adds	r0, r0, #1
+ 228              	.LVL6:
+ 237:Generated_Source\PSoC5/I2C.c **** 
+ 238:Generated_Source\PSoC5/I2C.c ****         /* Disable block */
+ 239:Generated_Source\PSoC5/I2C.c ****         I2C_CFG_REG &= (uint8) ~I2C_CFG_EN_SLAVE;
+ 229              		.loc 1 239 0
+ 230 0030 1B4D     		ldr	r5, .L16+16
+ 231 0032 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 232 0034 03F0FE03 		and	r3, r3, #254
+ 233 0038 2B70     		strb	r3, [r5]
+ 240:Generated_Source\PSoC5/I2C.c ****         /* Wait for block reset before disable power */
+ 241:Generated_Source\PSoC5/I2C.c ****         CyDelayCycles((uint32) blockResetCycles);
+ 234              		.loc 1 241 0
+ 235 003a 80B2     		uxth	r0, r0
+ 236 003c FFF7FEFF 		bl	CyDelayCycles
+ 237              	.LVL7:
+ 242:Generated_Source\PSoC5/I2C.c **** 
+ 243:Generated_Source\PSoC5/I2C.c ****         /* Disable power to block */
+ 244:Generated_Source\PSoC5/I2C.c ****         intState = CyEnterCriticalSection();
+ 238              		.loc 1 244 0
+ 239 0040 FFF7FEFF 		bl	CyEnterCriticalSection
+ 240              	.LVL8:
+ 245:Generated_Source\PSoC5/I2C.c ****         I2C_ACT_PWRMGR_REG  &= (uint8) ~I2C_ACT_PWR_EN;
+ 241              		.loc 1 245 0
+ 242 0044 174A     		ldr	r2, .L16+20
+ 243 0046 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 244 0048 03F0FB03 		and	r3, r3, #251
+ 245 004c 1370     		strb	r3, [r2]
+ 246:Generated_Source\PSoC5/I2C.c ****         I2C_STBY_PWRMGR_REG &= (uint8) ~I2C_STBY_PWR_EN;
+ 246              		.loc 1 246 0
+ 247 004e 1032     		adds	r2, r2, #16
+ 248 0050 1378     		ldrb	r3, [r2]	@ zero_extendqisi2
+ 249 0052 03F0FB03 		and	r3, r3, #251
+ 250 0056 1370     		strb	r3, [r2]
+ 247:Generated_Source\PSoC5/I2C.c ****         CyExitCriticalSection(intState);
+ 251              		.loc 1 247 0
+ 252 0058 FFF7FEFF 		bl	CyExitCriticalSection
+ 253              	.LVL9:
+ 248:Generated_Source\PSoC5/I2C.c **** 
+ 249:Generated_Source\PSoC5/I2C.c ****         /* Enable block */
+ 250:Generated_Source\PSoC5/I2C.c ****         I2C_CFG_REG |= (uint8) I2C_ENABLE_MS;
+ 254              		.loc 1 250 0
+ 255 005c 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 256 005e 43F00203 		orr	r3, r3, #2
+ 257 0062 2B70     		strb	r3, [r5]
+ 251:Generated_Source\PSoC5/I2C.c **** 
+ 252:Generated_Source\PSoC5/I2C.c ****         /* Restore registers effected by block disable. Ticket ID#198004 */
+ 253:Generated_Source\PSoC5/I2C.c ****         I2C_ADDR_REG    = I2C_backup.addr;
+ 258              		.loc 1 253 0
+ 259 0064 E378     		ldrb	r3, [r4, #3]	@ zero_extendqisi2
+ 260 0066 88F80030 		strb	r3, [r8]
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 10
+
+
+ 254:Generated_Source\PSoC5/I2C.c ****         I2C_ADDR_REG    = I2C_backup.addr;
+ 261              		.loc 1 254 0
+ 262 006a E378     		ldrb	r3, [r4, #3]	@ zero_extendqisi2
+ 263 006c 88F80030 		strb	r3, [r8]
+ 255:Generated_Source\PSoC5/I2C.c ****         I2C_CLKDIV1_REG = I2C_backup.clkDiv1;
+ 264              		.loc 1 255 0
+ 265 0070 2379     		ldrb	r3, [r4, #4]	@ zero_extendqisi2
+ 266 0072 3B70     		strb	r3, [r7]
+ 256:Generated_Source\PSoC5/I2C.c ****         I2C_CLKDIV2_REG = I2C_backup.clkDiv2;
+ 267              		.loc 1 256 0
+ 268 0074 6379     		ldrb	r3, [r4, #5]	@ zero_extendqisi2
+ 269 0076 3370     		strb	r3, [r6]
+ 270              	.LBE2:
+ 257:Generated_Source\PSoC5/I2C.c ****     }
+ 258:Generated_Source\PSoC5/I2C.c **** #else
+ 259:Generated_Source\PSoC5/I2C.c **** 
+ 260:Generated_Source\PSoC5/I2C.c ****     /* Disable slave or master bits */
+ 261:Generated_Source\PSoC5/I2C.c ****     I2C_CFG_REG &= (uint8) ~I2C_ENABLE_MS;
+ 262:Generated_Source\PSoC5/I2C.c **** 
+ 263:Generated_Source\PSoC5/I2C.c **** #if (I2C_MODE_SLAVE_ENABLED)
+ 264:Generated_Source\PSoC5/I2C.c ****     {
+ 265:Generated_Source\PSoC5/I2C.c ****         /* Disable bit counter */
+ 266:Generated_Source\PSoC5/I2C.c ****         uint8 intState = CyEnterCriticalSection();
+ 267:Generated_Source\PSoC5/I2C.c ****         I2C_COUNTER_AUX_CTL_REG &= (uint8) ~I2C_CNT7_ENABLE;
+ 268:Generated_Source\PSoC5/I2C.c ****         CyExitCriticalSection(intState);
+ 269:Generated_Source\PSoC5/I2C.c ****     }
+ 270:Generated_Source\PSoC5/I2C.c **** #endif /* (I2C_MODE_SLAVE_ENABLED) */
+ 271:Generated_Source\PSoC5/I2C.c **** 
+ 272:Generated_Source\PSoC5/I2C.c ****     /* Clear interrupt source register */
+ 273:Generated_Source\PSoC5/I2C.c ****     (void) I2C_CSR_REG;
+ 274:Generated_Source\PSoC5/I2C.c **** #endif /* (I2C_FF_IMPLEMENTED) */
+ 275:Generated_Source\PSoC5/I2C.c **** 
+ 276:Generated_Source\PSoC5/I2C.c ****     /* Disable interrupt on stop (enabled by write transaction) */
+ 277:Generated_Source\PSoC5/I2C.c ****     I2C_DISABLE_INT_ON_STOP;
+ 271              		.loc 1 277 0
+ 272 0078 2B78     		ldrb	r3, [r5]	@ zero_extendqisi2
+ 273 007a 03F0EF03 		and	r3, r3, #239
+ 274 007e 2B70     		strb	r3, [r5]
+ 278:Generated_Source\PSoC5/I2C.c ****     I2C_ClearPendingInt();
+ 275              		.loc 1 278 0
+ 276 0080 094B     		ldr	r3, .L16+24
+ 277 0082 C3F80090 		str	r9, [r3]
+ 279:Generated_Source\PSoC5/I2C.c **** 
+ 280:Generated_Source\PSoC5/I2C.c ****     /* Reset FSM to default state */
+ 281:Generated_Source\PSoC5/I2C.c ****     I2C_state = I2C_SM_IDLE;
+ 278              		.loc 1 281 0
+ 279 0086 1022     		movs	r2, #16
+ 280 0088 084B     		ldr	r3, .L16+28
+ 281 008a 1A70     		strb	r2, [r3]
+ 282 008c BDE8F883 		pop	{r3, r4, r5, r6, r7, r8, r9, pc}
+ 283              	.L17:
+ 284              		.align	2
+ 285              	.L16:
+ 286 0090 80E100E0 		.word	-536813184
+ 287 0094 00000000 		.word	I2C_backup
+ 288 0098 DB490040 		.word	1073760731
+ 289 009c DC490040 		.word	1073760732
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 11
+
+
+ 290 00a0 D6490040 		.word	1073760726
+ 291 00a4 A5430040 		.word	1073759141
+ 292 00a8 80E200E0 		.word	-536812928
+ 293 00ac 00000000 		.word	I2C_state
+ 294 00b0 CA490040 		.word	1073760714
+ 295              		.cfi_endproc
+ 296              	.LFE3:
+ 297              		.size	I2C_Stop, .-I2C_Stop
+ 298              		.comm	I2C_state,1,1
+ 299              		.global	I2C_initVar
+ 300              		.bss
+ 301              		.set	.LANCHOR0,. + 0
+ 302              		.type	I2C_initVar, %object
+ 303              		.size	I2C_initVar, 1
+ 304              	I2C_initVar:
+ 305 0000 00       		.space	1
+ 306              		.text
+ 307              	.Letext0:
+ 308              		.file 2 "Generated_Source\\PSoC5\\cytypes.h"
+ 309              		.file 3 "Generated_Source\\PSoC5\\I2C.h"
+ 310              		.file 4 "Generated_Source\\PSoC5\\I2C_PVT.h"
+ 311              		.file 5 "Generated_Source\\PSoC5\\CyLib.h"
+ 312              		.section	.debug_info,"",%progbits
+ 313              	.Ldebug_info0:
+ 314 0000 A9020000 		.4byte	0x2a9
+ 315 0004 0400     		.2byte	0x4
+ 316 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 317 000a 04       		.byte	0x4
+ 318 000b 01       		.uleb128 0x1
+ 319 000c D5000000 		.4byte	.LASF42
+ 320 0010 0C       		.byte	0xc
+ 321 0011 B1020000 		.4byte	.LASF43
+ 322 0015 75000000 		.4byte	.LASF44
+ 323 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 324 001d 00000000 		.4byte	0
+ 325 0021 00000000 		.4byte	.Ldebug_line0
+ 326 0025 02       		.uleb128 0x2
+ 327 0026 01       		.byte	0x1
+ 328 0027 06       		.byte	0x6
+ 329 0028 0C020000 		.4byte	.LASF0
+ 330 002c 02       		.uleb128 0x2
+ 331 002d 01       		.byte	0x1
+ 332 002e 08       		.byte	0x8
+ 333 002f C7000000 		.4byte	.LASF1
+ 334 0033 02       		.uleb128 0x2
+ 335 0034 02       		.byte	0x2
+ 336 0035 05       		.byte	0x5
+ 337 0036 54020000 		.4byte	.LASF2
+ 338 003a 02       		.uleb128 0x2
+ 339 003b 02       		.byte	0x2
+ 340 003c 07       		.byte	0x7
+ 341 003d 2E000000 		.4byte	.LASF3
+ 342 0041 02       		.uleb128 0x2
+ 343 0042 04       		.byte	0x4
+ 344 0043 05       		.byte	0x5
+ 345 0044 73020000 		.4byte	.LASF4
+ 346 0048 02       		.uleb128 0x2
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 12
+
+
+ 347 0049 04       		.byte	0x4
+ 348 004a 07       		.byte	0x7
+ 349 004b 68010000 		.4byte	.LASF5
+ 350 004f 02       		.uleb128 0x2
+ 351 0050 08       		.byte	0x8
+ 352 0051 05       		.byte	0x5
+ 353 0052 2A020000 		.4byte	.LASF6
+ 354 0056 02       		.uleb128 0x2
+ 355 0057 08       		.byte	0x8
+ 356 0058 07       		.byte	0x7
+ 357 0059 B0000000 		.4byte	.LASF7
+ 358 005d 03       		.uleb128 0x3
+ 359 005e 04       		.byte	0x4
+ 360 005f 05       		.byte	0x5
+ 361 0060 696E7400 		.ascii	"int\000"
+ 362 0064 02       		.uleb128 0x2
+ 363 0065 04       		.byte	0x4
+ 364 0066 07       		.byte	0x7
+ 365 0067 B1010000 		.4byte	.LASF8
+ 366 006b 04       		.uleb128 0x4
+ 367 006c 5E020000 		.4byte	.LASF9
+ 368 0070 02       		.byte	0x2
+ 369 0071 E401     		.2byte	0x1e4
+ 370 0073 2C000000 		.4byte	0x2c
+ 371 0077 04       		.uleb128 0x4
+ 372 0078 91010000 		.4byte	.LASF10
+ 373 007c 02       		.byte	0x2
+ 374 007d E501     		.2byte	0x1e5
+ 375 007f 3A000000 		.4byte	0x3a
+ 376 0083 04       		.uleb128 0x4
+ 377 0084 A1010000 		.4byte	.LASF11
+ 378 0088 02       		.byte	0x2
+ 379 0089 E601     		.2byte	0x1e6
+ 380 008b 48000000 		.4byte	0x48
+ 381 008f 02       		.uleb128 0x2
+ 382 0090 04       		.byte	0x4
+ 383 0091 04       		.byte	0x4
+ 384 0092 6F000000 		.4byte	.LASF12
+ 385 0096 02       		.uleb128 0x2
+ 386 0097 08       		.byte	0x8
+ 387 0098 04       		.byte	0x4
+ 388 0099 8A010000 		.4byte	.LASF13
+ 389 009d 02       		.uleb128 0x2
+ 390 009e 01       		.byte	0x1
+ 391 009f 08       		.byte	0x8
+ 392 00a0 38020000 		.4byte	.LASF14
+ 393 00a4 04       		.uleb128 0x4
+ 394 00a5 63010000 		.4byte	.LASF15
+ 395 00a9 02       		.byte	0x2
+ 396 00aa 8E02     		.2byte	0x28e
+ 397 00ac B0000000 		.4byte	0xb0
+ 398 00b0 05       		.uleb128 0x5
+ 399 00b1 6B000000 		.4byte	0x6b
+ 400 00b5 04       		.uleb128 0x4
+ 401 00b6 19000000 		.4byte	.LASF16
+ 402 00ba 02       		.byte	0x2
+ 403 00bb 9002     		.2byte	0x290
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 13
+
+
+ 404 00bd C1000000 		.4byte	0xc1
+ 405 00c1 05       		.uleb128 0x5
+ 406 00c2 83000000 		.4byte	0x83
+ 407 00c6 02       		.uleb128 0x2
+ 408 00c7 08       		.byte	0x8
+ 409 00c8 04       		.byte	0x4
+ 410 00c9 88020000 		.4byte	.LASF17
+ 411 00cd 02       		.uleb128 0x2
+ 412 00ce 04       		.byte	0x4
+ 413 00cf 07       		.byte	0x7
+ 414 00d0 21020000 		.4byte	.LASF18
+ 415 00d4 06       		.uleb128 0x6
+ 416 00d5 06       		.byte	0x6
+ 417 00d6 03       		.byte	0x3
+ 418 00d7 76       		.byte	0x76
+ 419 00d8 25010000 		.4byte	0x125
+ 420 00dc 07       		.uleb128 0x7
+ 421 00dd 7C020000 		.4byte	.LASF19
+ 422 00e1 03       		.byte	0x3
+ 423 00e2 78       		.byte	0x78
+ 424 00e3 6B000000 		.4byte	0x6b
+ 425 00e7 00       		.byte	0
+ 426 00e8 07       		.uleb128 0x7
+ 427 00e9 3D020000 		.4byte	.LASF20
+ 428 00ed 03       		.byte	0x3
+ 429 00ee 7B       		.byte	0x7b
+ 430 00ef 6B000000 		.4byte	0x6b
+ 431 00f3 01       		.byte	0x1
+ 432 00f4 08       		.uleb128 0x8
+ 433 00f5 63666700 		.ascii	"cfg\000"
+ 434 00f9 03       		.byte	0x3
+ 435 00fa 7C       		.byte	0x7c
+ 436 00fb 6B000000 		.4byte	0x6b
+ 437 00ff 02       		.byte	0x2
+ 438 0100 07       		.uleb128 0x7
+ 439 0101 7A010000 		.4byte	.LASF21
+ 440 0105 03       		.byte	0x3
+ 441 0106 7D       		.byte	0x7d
+ 442 0107 6B000000 		.4byte	0x6b
+ 443 010b 03       		.byte	0x3
+ 444 010c 07       		.uleb128 0x7
+ 445 010d E5010000 		.4byte	.LASF22
+ 446 0111 03       		.byte	0x3
+ 447 0112 7E       		.byte	0x7e
+ 448 0113 6B000000 		.4byte	0x6b
+ 449 0117 04       		.byte	0x4
+ 450 0118 07       		.uleb128 0x7
+ 451 0119 ED010000 		.4byte	.LASF23
+ 452 011d 03       		.byte	0x3
+ 453 011e 7F       		.byte	0x7f
+ 454 011f 6B000000 		.4byte	0x6b
+ 455 0123 05       		.byte	0x5
+ 456 0124 00       		.byte	0
+ 457 0125 09       		.uleb128 0x9
+ 458 0126 42020000 		.4byte	.LASF24
+ 459 012a 03       		.byte	0x3
+ 460 012b 89       		.byte	0x89
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 14
+
+
+ 461 012c D4000000 		.4byte	0xd4
+ 462 0130 0A       		.uleb128 0xa
+ 463 0131 18020000 		.4byte	.LASF25
+ 464 0135 01       		.byte	0x1
+ 465 0136 31       		.byte	0x31
+ 466 0137 00000000 		.4byte	.LFB0
+ 467 013b 68000000 		.4byte	.LFE0-.LFB0
+ 468 013f 01       		.uleb128 0x1
+ 469 0140 9C       		.byte	0x9c
+ 470 0141 6F010000 		.4byte	0x16f
+ 471 0145 0B       		.uleb128 0xb
+ 472 0146 30000000 		.4byte	.LVL0
+ 473 014a 75020000 		.4byte	0x275
+ 474 014e 5E010000 		.4byte	0x15e
+ 475 0152 0C       		.uleb128 0xc
+ 476 0153 01       		.uleb128 0x1
+ 477 0154 50       		.byte	0x50
+ 478 0155 02       		.uleb128 0x2
+ 479 0156 75       		.byte	0x75
+ 480 0157 00       		.sleb128 0
+ 481 0158 0C       		.uleb128 0xc
+ 482 0159 01       		.uleb128 0x1
+ 483 015a 51       		.byte	0x51
+ 484 015b 01       		.uleb128 0x1
+ 485 015c 37       		.byte	0x37
+ 486 015d 00       		.byte	0
+ 487 015e 0D       		.uleb128 0xd
+ 488 015f 38000000 		.4byte	.LVL1
+ 489 0163 80020000 		.4byte	0x280
+ 490 0167 0C       		.uleb128 0xc
+ 491 0168 01       		.uleb128 0x1
+ 492 0169 50       		.byte	0x50
+ 493 016a 02       		.uleb128 0x2
+ 494 016b 75       		.byte	0x75
+ 495 016c 00       		.sleb128 0
+ 496 016d 00       		.byte	0
+ 497 016e 00       		.byte	0
+ 498 016f 0A       		.uleb128 0xa
+ 499 0170 7F010000 		.4byte	.LASF26
+ 500 0174 01       		.byte	0x1
+ 501 0175 85       		.byte	0x85
+ 502 0176 00000000 		.4byte	.LFB1
+ 503 017a 24000000 		.4byte	.LFE1-.LFB1
+ 504 017e 01       		.uleb128 0x1
+ 505 017f 9C       		.byte	0x9c
+ 506 0180 A6010000 		.4byte	0x1a6
+ 507 0184 0E       		.uleb128 0xe
+ 508 0185 A8010000 		.4byte	.LASF29
+ 509 0189 01       		.byte	0x1
+ 510 018a 88       		.byte	0x88
+ 511 018b 6B000000 		.4byte	0x6b
+ 512 018f 00000000 		.4byte	.LLST0
+ 513 0193 0F       		.uleb128 0xf
+ 514 0194 06000000 		.4byte	.LVL2
+ 515 0198 8B020000 		.4byte	0x28b
+ 516 019c 0F       		.uleb128 0xf
+ 517 019d 1E000000 		.4byte	.LVL3
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 15
+
+
+ 518 01a1 96020000 		.4byte	0x296
+ 519 01a5 00       		.byte	0
+ 520 01a6 0A       		.uleb128 0xa
+ 521 01a7 52000000 		.4byte	.LASF27
+ 522 01ab 01       		.byte	0x1
+ 523 01ac BD       		.byte	0xbd
+ 524 01ad 00000000 		.4byte	.LFB2
+ 525 01b1 28000000 		.4byte	.LFE2-.LFB2
+ 526 01b5 01       		.uleb128 0x1
+ 527 01b6 9C       		.byte	0x9c
+ 528 01b7 CE010000 		.4byte	0x1ce
+ 529 01bb 0F       		.uleb128 0xf
+ 530 01bc 0C000000 		.4byte	.LVL4
+ 531 01c0 30010000 		.4byte	0x130
+ 532 01c4 0F       		.uleb128 0xf
+ 533 01c5 16000000 		.4byte	.LVL5
+ 534 01c9 6F010000 		.4byte	0x16f
+ 535 01cd 00       		.byte	0
+ 536 01ce 0A       		.uleb128 0xa
+ 537 01cf 98010000 		.4byte	.LASF28
+ 538 01d3 01       		.byte	0x1
+ 539 01d4 D9       		.byte	0xd9
+ 540 01d5 00000000 		.4byte	.LFB3
+ 541 01d9 B4000000 		.4byte	.LFE3-.LFB3
+ 542 01dd 01       		.uleb128 0x1
+ 543 01de 9C       		.byte	0x9c
+ 544 01df 27020000 		.4byte	0x227
+ 545 01e3 10       		.uleb128 0x10
+ 546 01e4 0E000000 		.4byte	.LBB2
+ 547 01e8 6A000000 		.4byte	.LBE2-.LBB2
+ 548 01ec 0E       		.uleb128 0xe
+ 549 01ed A8010000 		.4byte	.LASF29
+ 550 01f1 01       		.byte	0x1
+ 551 01f2 E3       		.byte	0xe3
+ 552 01f3 6B000000 		.4byte	0x6b
+ 553 01f7 13000000 		.4byte	.LLST1
+ 554 01fb 0E       		.uleb128 0xe
+ 555 01fc 41000000 		.4byte	.LASF30
+ 556 0200 01       		.byte	0x1
+ 557 0201 E4       		.byte	0xe4
+ 558 0202 77000000 		.4byte	0x77
+ 559 0206 26000000 		.4byte	.LLST2
+ 560 020a 0F       		.uleb128 0xf
+ 561 020b 40000000 		.4byte	.LVL7
+ 562 020f A1020000 		.4byte	0x2a1
+ 563 0213 0F       		.uleb128 0xf
+ 564 0214 44000000 		.4byte	.LVL8
+ 565 0218 8B020000 		.4byte	0x28b
+ 566 021c 0F       		.uleb128 0xf
+ 567 021d 5C000000 		.4byte	.LVL9
+ 568 0221 96020000 		.4byte	0x296
+ 569 0225 00       		.byte	0
+ 570 0226 00       		.byte	0
+ 571 0227 11       		.uleb128 0x11
+ 572 0228 CE020000 		.4byte	.LASF31
+ 573 022c 01       		.byte	0x1
+ 574 022d 18       		.byte	0x18
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 16
+
+
+ 575 022e 6B000000 		.4byte	0x6b
+ 576 0232 05       		.uleb128 0x5
+ 577 0233 03       		.byte	0x3
+ 578 0234 00000000 		.4byte	I2C_initVar
+ 579 0238 12       		.uleb128 0x12
+ 580 0239 0E000000 		.4byte	.LASF32
+ 581 023d 04       		.byte	0x4
+ 582 023e 21       		.byte	0x21
+ 583 023f 25010000 		.4byte	0x125
+ 584 0243 11       		.uleb128 0x11
+ 585 0244 94020000 		.4byte	.LASF33
+ 586 0248 01       		.byte	0x1
+ 587 0249 1A       		.byte	0x1a
+ 588 024a B0000000 		.4byte	0xb0
+ 589 024e 05       		.uleb128 0x5
+ 590 024f 03       		.byte	0x3
+ 591 0250 00000000 		.4byte	I2C_state
+ 592 0254 12       		.uleb128 0x12
+ 593 0255 64020000 		.4byte	.LASF34
+ 594 0259 04       		.byte	0x4
+ 595 025a 27       		.byte	0x27
+ 596 025b B0000000 		.4byte	0xb0
+ 597 025f 12       		.uleb128 0x12
+ 598 0260 5C000000 		.4byte	.LASF35
+ 599 0264 04       		.byte	0x4
+ 600 0265 2D       		.byte	0x2d
+ 601 0266 B0000000 		.4byte	0xb0
+ 602 026a 12       		.uleb128 0x12
+ 603 026b 9E020000 		.4byte	.LASF36
+ 604 026f 04       		.byte	0x4
+ 605 0270 32       		.byte	0x32
+ 606 0271 B0000000 		.4byte	0xb0
+ 607 0275 13       		.uleb128 0x13
+ 608 0276 D4010000 		.4byte	.LASF37
+ 609 027a D4010000 		.4byte	.LASF37
+ 610 027e 05       		.byte	0x5
+ 611 027f 8B       		.byte	0x8b
+ 612 0280 13       		.uleb128 0x13
+ 613 0281 1F000000 		.4byte	.LASF38
+ 614 0285 1F000000 		.4byte	.LASF38
+ 615 0289 05       		.byte	0x5
+ 616 028a 88       		.byte	0x88
+ 617 028b 13       		.uleb128 0x13
+ 618 028c F5010000 		.4byte	.LASF39
+ 619 0290 F5010000 		.4byte	.LASF39
+ 620 0294 05       		.byte	0x5
+ 621 0295 7D       		.byte	0x7d
+ 622 0296 13       		.uleb128 0x13
+ 623 0297 BE010000 		.4byte	.LASF40
+ 624 029b BE010000 		.4byte	.LASF40
+ 625 029f 05       		.byte	0x5
+ 626 02a0 7E       		.byte	0x7e
+ 627 02a1 13       		.uleb128 0x13
+ 628 02a2 00000000 		.4byte	.LASF41
+ 629 02a6 00000000 		.4byte	.LASF41
+ 630 02aa 05       		.byte	0x5
+ 631 02ab 79       		.byte	0x79
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 17
+
+
+ 632 02ac 00       		.byte	0
+ 633              		.section	.debug_abbrev,"",%progbits
+ 634              	.Ldebug_abbrev0:
+ 635 0000 01       		.uleb128 0x1
+ 636 0001 11       		.uleb128 0x11
+ 637 0002 01       		.byte	0x1
+ 638 0003 25       		.uleb128 0x25
+ 639 0004 0E       		.uleb128 0xe
+ 640 0005 13       		.uleb128 0x13
+ 641 0006 0B       		.uleb128 0xb
+ 642 0007 03       		.uleb128 0x3
+ 643 0008 0E       		.uleb128 0xe
+ 644 0009 1B       		.uleb128 0x1b
+ 645 000a 0E       		.uleb128 0xe
+ 646 000b 55       		.uleb128 0x55
+ 647 000c 17       		.uleb128 0x17
+ 648 000d 11       		.uleb128 0x11
+ 649 000e 01       		.uleb128 0x1
+ 650 000f 10       		.uleb128 0x10
+ 651 0010 17       		.uleb128 0x17
+ 652 0011 00       		.byte	0
+ 653 0012 00       		.byte	0
+ 654 0013 02       		.uleb128 0x2
+ 655 0014 24       		.uleb128 0x24
+ 656 0015 00       		.byte	0
+ 657 0016 0B       		.uleb128 0xb
+ 658 0017 0B       		.uleb128 0xb
+ 659 0018 3E       		.uleb128 0x3e
+ 660 0019 0B       		.uleb128 0xb
+ 661 001a 03       		.uleb128 0x3
+ 662 001b 0E       		.uleb128 0xe
+ 663 001c 00       		.byte	0
+ 664 001d 00       		.byte	0
+ 665 001e 03       		.uleb128 0x3
+ 666 001f 24       		.uleb128 0x24
+ 667 0020 00       		.byte	0
+ 668 0021 0B       		.uleb128 0xb
+ 669 0022 0B       		.uleb128 0xb
+ 670 0023 3E       		.uleb128 0x3e
+ 671 0024 0B       		.uleb128 0xb
+ 672 0025 03       		.uleb128 0x3
+ 673 0026 08       		.uleb128 0x8
+ 674 0027 00       		.byte	0
+ 675 0028 00       		.byte	0
+ 676 0029 04       		.uleb128 0x4
+ 677 002a 16       		.uleb128 0x16
+ 678 002b 00       		.byte	0
+ 679 002c 03       		.uleb128 0x3
+ 680 002d 0E       		.uleb128 0xe
+ 681 002e 3A       		.uleb128 0x3a
+ 682 002f 0B       		.uleb128 0xb
+ 683 0030 3B       		.uleb128 0x3b
+ 684 0031 05       		.uleb128 0x5
+ 685 0032 49       		.uleb128 0x49
+ 686 0033 13       		.uleb128 0x13
+ 687 0034 00       		.byte	0
+ 688 0035 00       		.byte	0
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 18
+
+
+ 689 0036 05       		.uleb128 0x5
+ 690 0037 35       		.uleb128 0x35
+ 691 0038 00       		.byte	0
+ 692 0039 49       		.uleb128 0x49
+ 693 003a 13       		.uleb128 0x13
+ 694 003b 00       		.byte	0
+ 695 003c 00       		.byte	0
+ 696 003d 06       		.uleb128 0x6
+ 697 003e 13       		.uleb128 0x13
+ 698 003f 01       		.byte	0x1
+ 699 0040 0B       		.uleb128 0xb
+ 700 0041 0B       		.uleb128 0xb
+ 701 0042 3A       		.uleb128 0x3a
+ 702 0043 0B       		.uleb128 0xb
+ 703 0044 3B       		.uleb128 0x3b
+ 704 0045 0B       		.uleb128 0xb
+ 705 0046 01       		.uleb128 0x1
+ 706 0047 13       		.uleb128 0x13
+ 707 0048 00       		.byte	0
+ 708 0049 00       		.byte	0
+ 709 004a 07       		.uleb128 0x7
+ 710 004b 0D       		.uleb128 0xd
+ 711 004c 00       		.byte	0
+ 712 004d 03       		.uleb128 0x3
+ 713 004e 0E       		.uleb128 0xe
+ 714 004f 3A       		.uleb128 0x3a
+ 715 0050 0B       		.uleb128 0xb
+ 716 0051 3B       		.uleb128 0x3b
+ 717 0052 0B       		.uleb128 0xb
+ 718 0053 49       		.uleb128 0x49
+ 719 0054 13       		.uleb128 0x13
+ 720 0055 38       		.uleb128 0x38
+ 721 0056 0B       		.uleb128 0xb
+ 722 0057 00       		.byte	0
+ 723 0058 00       		.byte	0
+ 724 0059 08       		.uleb128 0x8
+ 725 005a 0D       		.uleb128 0xd
+ 726 005b 00       		.byte	0
+ 727 005c 03       		.uleb128 0x3
+ 728 005d 08       		.uleb128 0x8
+ 729 005e 3A       		.uleb128 0x3a
+ 730 005f 0B       		.uleb128 0xb
+ 731 0060 3B       		.uleb128 0x3b
+ 732 0061 0B       		.uleb128 0xb
+ 733 0062 49       		.uleb128 0x49
+ 734 0063 13       		.uleb128 0x13
+ 735 0064 38       		.uleb128 0x38
+ 736 0065 0B       		.uleb128 0xb
+ 737 0066 00       		.byte	0
+ 738 0067 00       		.byte	0
+ 739 0068 09       		.uleb128 0x9
+ 740 0069 16       		.uleb128 0x16
+ 741 006a 00       		.byte	0
+ 742 006b 03       		.uleb128 0x3
+ 743 006c 0E       		.uleb128 0xe
+ 744 006d 3A       		.uleb128 0x3a
+ 745 006e 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 19
+
+
+ 746 006f 3B       		.uleb128 0x3b
+ 747 0070 0B       		.uleb128 0xb
+ 748 0071 49       		.uleb128 0x49
+ 749 0072 13       		.uleb128 0x13
+ 750 0073 00       		.byte	0
+ 751 0074 00       		.byte	0
+ 752 0075 0A       		.uleb128 0xa
+ 753 0076 2E       		.uleb128 0x2e
+ 754 0077 01       		.byte	0x1
+ 755 0078 3F       		.uleb128 0x3f
+ 756 0079 19       		.uleb128 0x19
+ 757 007a 03       		.uleb128 0x3
+ 758 007b 0E       		.uleb128 0xe
+ 759 007c 3A       		.uleb128 0x3a
+ 760 007d 0B       		.uleb128 0xb
+ 761 007e 3B       		.uleb128 0x3b
+ 762 007f 0B       		.uleb128 0xb
+ 763 0080 27       		.uleb128 0x27
+ 764 0081 19       		.uleb128 0x19
+ 765 0082 11       		.uleb128 0x11
+ 766 0083 01       		.uleb128 0x1
+ 767 0084 12       		.uleb128 0x12
+ 768 0085 06       		.uleb128 0x6
+ 769 0086 40       		.uleb128 0x40
+ 770 0087 18       		.uleb128 0x18
+ 771 0088 9742     		.uleb128 0x2117
+ 772 008a 19       		.uleb128 0x19
+ 773 008b 01       		.uleb128 0x1
+ 774 008c 13       		.uleb128 0x13
+ 775 008d 00       		.byte	0
+ 776 008e 00       		.byte	0
+ 777 008f 0B       		.uleb128 0xb
+ 778 0090 898201   		.uleb128 0x4109
+ 779 0093 01       		.byte	0x1
+ 780 0094 11       		.uleb128 0x11
+ 781 0095 01       		.uleb128 0x1
+ 782 0096 31       		.uleb128 0x31
+ 783 0097 13       		.uleb128 0x13
+ 784 0098 01       		.uleb128 0x1
+ 785 0099 13       		.uleb128 0x13
+ 786 009a 00       		.byte	0
+ 787 009b 00       		.byte	0
+ 788 009c 0C       		.uleb128 0xc
+ 789 009d 8A8201   		.uleb128 0x410a
+ 790 00a0 00       		.byte	0
+ 791 00a1 02       		.uleb128 0x2
+ 792 00a2 18       		.uleb128 0x18
+ 793 00a3 9142     		.uleb128 0x2111
+ 794 00a5 18       		.uleb128 0x18
+ 795 00a6 00       		.byte	0
+ 796 00a7 00       		.byte	0
+ 797 00a8 0D       		.uleb128 0xd
+ 798 00a9 898201   		.uleb128 0x4109
+ 799 00ac 01       		.byte	0x1
+ 800 00ad 11       		.uleb128 0x11
+ 801 00ae 01       		.uleb128 0x1
+ 802 00af 31       		.uleb128 0x31
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 20
+
+
+ 803 00b0 13       		.uleb128 0x13
+ 804 00b1 00       		.byte	0
+ 805 00b2 00       		.byte	0
+ 806 00b3 0E       		.uleb128 0xe
+ 807 00b4 34       		.uleb128 0x34
+ 808 00b5 00       		.byte	0
+ 809 00b6 03       		.uleb128 0x3
+ 810 00b7 0E       		.uleb128 0xe
+ 811 00b8 3A       		.uleb128 0x3a
+ 812 00b9 0B       		.uleb128 0xb
+ 813 00ba 3B       		.uleb128 0x3b
+ 814 00bb 0B       		.uleb128 0xb
+ 815 00bc 49       		.uleb128 0x49
+ 816 00bd 13       		.uleb128 0x13
+ 817 00be 02       		.uleb128 0x2
+ 818 00bf 17       		.uleb128 0x17
+ 819 00c0 00       		.byte	0
+ 820 00c1 00       		.byte	0
+ 821 00c2 0F       		.uleb128 0xf
+ 822 00c3 898201   		.uleb128 0x4109
+ 823 00c6 00       		.byte	0
+ 824 00c7 11       		.uleb128 0x11
+ 825 00c8 01       		.uleb128 0x1
+ 826 00c9 31       		.uleb128 0x31
+ 827 00ca 13       		.uleb128 0x13
+ 828 00cb 00       		.byte	0
+ 829 00cc 00       		.byte	0
+ 830 00cd 10       		.uleb128 0x10
+ 831 00ce 0B       		.uleb128 0xb
+ 832 00cf 01       		.byte	0x1
+ 833 00d0 11       		.uleb128 0x11
+ 834 00d1 01       		.uleb128 0x1
+ 835 00d2 12       		.uleb128 0x12
+ 836 00d3 06       		.uleb128 0x6
+ 837 00d4 00       		.byte	0
+ 838 00d5 00       		.byte	0
+ 839 00d6 11       		.uleb128 0x11
+ 840 00d7 34       		.uleb128 0x34
+ 841 00d8 00       		.byte	0
+ 842 00d9 03       		.uleb128 0x3
+ 843 00da 0E       		.uleb128 0xe
+ 844 00db 3A       		.uleb128 0x3a
+ 845 00dc 0B       		.uleb128 0xb
+ 846 00dd 3B       		.uleb128 0x3b
+ 847 00de 0B       		.uleb128 0xb
+ 848 00df 49       		.uleb128 0x49
+ 849 00e0 13       		.uleb128 0x13
+ 850 00e1 3F       		.uleb128 0x3f
+ 851 00e2 19       		.uleb128 0x19
+ 852 00e3 02       		.uleb128 0x2
+ 853 00e4 18       		.uleb128 0x18
+ 854 00e5 00       		.byte	0
+ 855 00e6 00       		.byte	0
+ 856 00e7 12       		.uleb128 0x12
+ 857 00e8 34       		.uleb128 0x34
+ 858 00e9 00       		.byte	0
+ 859 00ea 03       		.uleb128 0x3
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 21
+
+
+ 860 00eb 0E       		.uleb128 0xe
+ 861 00ec 3A       		.uleb128 0x3a
+ 862 00ed 0B       		.uleb128 0xb
+ 863 00ee 3B       		.uleb128 0x3b
+ 864 00ef 0B       		.uleb128 0xb
+ 865 00f0 49       		.uleb128 0x49
+ 866 00f1 13       		.uleb128 0x13
+ 867 00f2 3F       		.uleb128 0x3f
+ 868 00f3 19       		.uleb128 0x19
+ 869 00f4 3C       		.uleb128 0x3c
+ 870 00f5 19       		.uleb128 0x19
+ 871 00f6 00       		.byte	0
+ 872 00f7 00       		.byte	0
+ 873 00f8 13       		.uleb128 0x13
+ 874 00f9 2E       		.uleb128 0x2e
+ 875 00fa 00       		.byte	0
+ 876 00fb 3F       		.uleb128 0x3f
+ 877 00fc 19       		.uleb128 0x19
+ 878 00fd 3C       		.uleb128 0x3c
+ 879 00fe 19       		.uleb128 0x19
+ 880 00ff 6E       		.uleb128 0x6e
+ 881 0100 0E       		.uleb128 0xe
+ 882 0101 03       		.uleb128 0x3
+ 883 0102 0E       		.uleb128 0xe
+ 884 0103 3A       		.uleb128 0x3a
+ 885 0104 0B       		.uleb128 0xb
+ 886 0105 3B       		.uleb128 0x3b
+ 887 0106 0B       		.uleb128 0xb
+ 888 0107 00       		.byte	0
+ 889 0108 00       		.byte	0
+ 890 0109 00       		.byte	0
+ 891              		.section	.debug_loc,"",%progbits
+ 892              	.Ldebug_loc0:
+ 893              	.LLST0:
+ 894 0000 06000000 		.4byte	.LVL2
+ 895 0004 1D000000 		.4byte	.LVL3-1
+ 896 0008 0100     		.2byte	0x1
+ 897 000a 50       		.byte	0x50
+ 898 000b 00000000 		.4byte	0
+ 899 000f 00000000 		.4byte	0
+ 900              	.LLST1:
+ 901 0013 44000000 		.4byte	.LVL8
+ 902 0017 5B000000 		.4byte	.LVL9-1
+ 903 001b 0100     		.2byte	0x1
+ 904 001d 50       		.byte	0x50
+ 905 001e 00000000 		.4byte	0
+ 906 0022 00000000 		.4byte	0
+ 907              	.LLST2:
+ 908 0026 30000000 		.4byte	.LVL6
+ 909 002a 3F000000 		.4byte	.LVL7-1
+ 910 002e 0100     		.2byte	0x1
+ 911 0030 50       		.byte	0x50
+ 912 0031 00000000 		.4byte	0
+ 913 0035 00000000 		.4byte	0
+ 914              		.section	.debug_aranges,"",%progbits
+ 915 0000 34000000 		.4byte	0x34
+ 916 0004 0200     		.2byte	0x2
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 22
+
+
+ 917 0006 00000000 		.4byte	.Ldebug_info0
+ 918 000a 04       		.byte	0x4
+ 919 000b 00       		.byte	0
+ 920 000c 0000     		.2byte	0
+ 921 000e 0000     		.2byte	0
+ 922 0010 00000000 		.4byte	.LFB0
+ 923 0014 68000000 		.4byte	.LFE0-.LFB0
+ 924 0018 00000000 		.4byte	.LFB1
+ 925 001c 24000000 		.4byte	.LFE1-.LFB1
+ 926 0020 00000000 		.4byte	.LFB2
+ 927 0024 28000000 		.4byte	.LFE2-.LFB2
+ 928 0028 00000000 		.4byte	.LFB3
+ 929 002c B4000000 		.4byte	.LFE3-.LFB3
+ 930 0030 00000000 		.4byte	0
+ 931 0034 00000000 		.4byte	0
+ 932              		.section	.debug_ranges,"",%progbits
+ 933              	.Ldebug_ranges0:
+ 934 0000 00000000 		.4byte	.LFB0
+ 935 0004 68000000 		.4byte	.LFE0
+ 936 0008 00000000 		.4byte	.LFB1
+ 937 000c 24000000 		.4byte	.LFE1
+ 938 0010 00000000 		.4byte	.LFB2
+ 939 0014 28000000 		.4byte	.LFE2
+ 940 0018 00000000 		.4byte	.LFB3
+ 941 001c B4000000 		.4byte	.LFE3
+ 942 0020 00000000 		.4byte	0
+ 943 0024 00000000 		.4byte	0
+ 944              		.section	.debug_line,"",%progbits
+ 945              	.Ldebug_line0:
+ 946 0000 D5000000 		.section	.debug_str,"MS",%progbits,1
+ 946      02006100 
+ 946      00000201 
+ 946      FB0E0D00 
+ 946      01010101 
+ 947              	.LASF41:
+ 948 0000 43794465 		.ascii	"CyDelayCycles\000"
+ 948      6C617943 
+ 948      79636C65 
+ 948      7300
+ 949              	.LASF32:
+ 950 000e 4932435F 		.ascii	"I2C_backup\000"
+ 950      6261636B 
+ 950      757000
+ 951              	.LASF16:
+ 952 0019 72656733 		.ascii	"reg32\000"
+ 952      3200
+ 953              	.LASF38:
+ 954 001f 4379496E 		.ascii	"CyIntSetVector\000"
+ 954      74536574 
+ 954      56656374 
+ 954      6F7200
+ 955              	.LASF3:
+ 956 002e 73686F72 		.ascii	"short unsigned int\000"
+ 956      7420756E 
+ 956      7369676E 
+ 956      65642069 
+ 956      6E7400
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 23
+
+
+ 957              	.LASF30:
+ 958 0041 626C6F63 		.ascii	"blockResetCycles\000"
+ 958      6B526573 
+ 958      65744379 
+ 958      636C6573 
+ 958      00
+ 959              	.LASF27:
+ 960 0052 4932435F 		.ascii	"I2C_Start\000"
+ 960      53746172 
+ 960      7400
+ 961              	.LASF35:
+ 962 005c 4932435F 		.ascii	"I2C_mstrRdBufIndex\000"
+ 962      6D737472 
+ 962      52644275 
+ 962      66496E64 
+ 962      657800
+ 963              	.LASF12:
+ 964 006f 666C6F61 		.ascii	"float\000"
+ 964      7400
+ 965              	.LASF44:
+ 966 0075 433A5C55 		.ascii	"C:\\Users\\Sam\\Documents\\PSoC Creator\\ADCtest\\D"
+ 966      73657273 
+ 966      5C53616D 
+ 966      5C446F63 
+ 966      756D656E 
+ 967 00a2 65736967 		.ascii	"esign01.cydsn\000"
+ 967      6E30312E 
+ 967      63796473 
+ 967      6E00
+ 968              	.LASF7:
+ 969 00b0 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 969      206C6F6E 
+ 969      6720756E 
+ 969      7369676E 
+ 969      65642069 
+ 970              	.LASF1:
+ 971 00c7 756E7369 		.ascii	"unsigned char\000"
+ 971      676E6564 
+ 971      20636861 
+ 971      7200
+ 972              	.LASF42:
+ 973 00d5 474E5520 		.ascii	"GNU C11 5.4.1 20160609 (release) [ARM/embedded-5-br"
+ 973      43313120 
+ 973      352E342E 
+ 973      31203230 
+ 973      31363036 
+ 974 0108 616E6368 		.ascii	"anch revision 237715] -mcpu=cortex-m3 -mthumb -g -O"
+ 974      20726576 
+ 974      6973696F 
+ 974      6E203233 
+ 974      37373135 
+ 975 013b 67202D66 		.ascii	"g -ffunction-sections -ffat-lto-objects\000"
+ 975      66756E63 
+ 975      74696F6E 
+ 975      2D736563 
+ 975      74696F6E 
+ 976              	.LASF15:
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 24
+
+
+ 977 0163 72656738 		.ascii	"reg8\000"
+ 977      00
+ 978              	.LASF5:
+ 979 0168 6C6F6E67 		.ascii	"long unsigned int\000"
+ 979      20756E73 
+ 979      69676E65 
+ 979      6420696E 
+ 979      7400
+ 980              	.LASF21:
+ 981 017a 61646472 		.ascii	"addr\000"
+ 981      00
+ 982              	.LASF26:
+ 983 017f 4932435F 		.ascii	"I2C_Enable\000"
+ 983      456E6162 
+ 983      6C6500
+ 984              	.LASF13:
+ 985 018a 646F7562 		.ascii	"double\000"
+ 985      6C6500
+ 986              	.LASF10:
+ 987 0191 75696E74 		.ascii	"uint16\000"
+ 987      313600
+ 988              	.LASF28:
+ 989 0198 4932435F 		.ascii	"I2C_Stop\000"
+ 989      53746F70 
+ 989      00
+ 990              	.LASF11:
+ 991 01a1 75696E74 		.ascii	"uint32\000"
+ 991      333200
+ 992              	.LASF29:
+ 993 01a8 696E7453 		.ascii	"intState\000"
+ 993      74617465 
+ 993      00
+ 994              	.LASF8:
+ 995 01b1 756E7369 		.ascii	"unsigned int\000"
+ 995      676E6564 
+ 995      20696E74 
+ 995      00
+ 996              	.LASF40:
+ 997 01be 43794578 		.ascii	"CyExitCriticalSection\000"
+ 997      69744372 
+ 997      69746963 
+ 997      616C5365 
+ 997      6374696F 
+ 998              	.LASF37:
+ 999 01d4 4379496E 		.ascii	"CyIntSetPriority\000"
+ 999      74536574 
+ 999      5072696F 
+ 999      72697479 
+ 999      00
+ 1000              	.LASF22:
+ 1001 01e5 636C6B44 		.ascii	"clkDiv1\000"
+ 1001      69763100 
+ 1002              	.LASF23:
+ 1003 01ed 636C6B44 		.ascii	"clkDiv2\000"
+ 1003      69763200 
+ 1004              	.LASF39:
+ 1005 01f5 4379456E 		.ascii	"CyEnterCriticalSection\000"
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 25
+
+
+ 1005      74657243 
+ 1005      72697469 
+ 1005      63616C53 
+ 1005      65637469 
+ 1006              	.LASF0:
+ 1007 020c 7369676E 		.ascii	"signed char\000"
+ 1007      65642063 
+ 1007      68617200 
+ 1008              	.LASF25:
+ 1009 0218 4932435F 		.ascii	"I2C_Init\000"
+ 1009      496E6974 
+ 1009      00
+ 1010              	.LASF18:
+ 1011 0221 73697A65 		.ascii	"sizetype\000"
+ 1011      74797065 
+ 1011      00
+ 1012              	.LASF6:
+ 1013 022a 6C6F6E67 		.ascii	"long long int\000"
+ 1013      206C6F6E 
+ 1013      6720696E 
+ 1013      7400
+ 1014              	.LASF14:
+ 1015 0238 63686172 		.ascii	"char\000"
+ 1015      00
+ 1016              	.LASF20:
+ 1017 023d 78636667 		.ascii	"xcfg\000"
+ 1017      00
+ 1018              	.LASF24:
+ 1019 0242 4932435F 		.ascii	"I2C_BACKUP_STRUCT\000"
+ 1019      4241434B 
+ 1019      55505F53 
+ 1019      54525543 
+ 1019      5400
+ 1020              	.LASF2:
+ 1021 0254 73686F72 		.ascii	"short int\000"
+ 1021      7420696E 
+ 1021      7400
+ 1022              	.LASF9:
+ 1023 025e 75696E74 		.ascii	"uint8\000"
+ 1023      3800
+ 1024              	.LASF34:
+ 1025 0264 4932435F 		.ascii	"I2C_mstrStatus\000"
+ 1025      6D737472 
+ 1025      53746174 
+ 1025      757300
+ 1026              	.LASF4:
+ 1027 0273 6C6F6E67 		.ascii	"long int\000"
+ 1027      20696E74 
+ 1027      00
+ 1028              	.LASF19:
+ 1029 027c 656E6162 		.ascii	"enableState\000"
+ 1029      6C655374 
+ 1029      61746500 
+ 1030              	.LASF17:
+ 1031 0288 6C6F6E67 		.ascii	"long double\000"
+ 1031      20646F75 
+ 1031      626C6500 
+ARM GAS  C:\Users\Sam\AppData\Local\Temp\cccWRb7h.s 			page 26
+
+
+ 1032              	.LASF33:
+ 1033 0294 4932435F 		.ascii	"I2C_state\000"
+ 1033      73746174 
+ 1033      6500
+ 1034              	.LASF36:
+ 1035 029e 4932435F 		.ascii	"I2C_mstrWrBufIndex\000"
+ 1035      6D737472 
+ 1035      57724275 
+ 1035      66496E64 
+ 1035      657800
+ 1036              	.LASF43:
+ 1037 02b1 47656E65 		.ascii	"Generated_Source\\PSoC5\\I2C.c\000"
+ 1037      72617465 
+ 1037      645F536F 
+ 1037      75726365 
+ 1037      5C50536F 
+ 1038              	.LASF31:
+ 1039 02ce 4932435F 		.ascii	"I2C_initVar\000"
+ 1039      696E6974 
+ 1039      56617200 
+ 1040              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.4.1 20160609 (release) [ARM/embedded-5-bran

@@ -1,0 +1,8 @@
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|3dbff1ad-5902-4643-9fd3-01cd676d76cb
+C:\Users\Sam\Documents\PSoC Creator\4.2\Downloads ( 4.2).cylib\Downloads ( 4.2).cyprj|cb97352e-bbd6-4b9f-b16c-69d12ea9e72c
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|b13a7118-5b7d-4104-a901-a76ea9614444
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|ddb52488-fc0f-4b20-9c75-3ffc751b92c3
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|1446d5ab-78aa-42c3-911d-eec213fb0acc
+C:\Users\Sam\Documents\PSoC Creator\Librairies additionnelles\CharLCD_I2C.cylib\CharLCD_I2C.cyprj|5fc53622-b717-4ee8-bd9d-60b69e56d4fe
+C:\Program Files (x86)\Cypress\PSoC Creator\4.2\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|2f9c8adc-2dbb-400f-b56a-931d73062e87
+C:\Users\Sam\Documents\PSoC Creator\ADCtest\Design01.cydsn\Design01.cyprj|56dbd873-f023-4c0c-b889-a7a4a31b73ca
