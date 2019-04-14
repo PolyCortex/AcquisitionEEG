@@ -15,7 +15,7 @@ The simpler PCB layouts help highlight some of the underlying core elements need
 
 Several new components and features were added to perfect our pipeline’s analog signal processing capabilities.
 
-*Figure 4 Annotated 2019 v2.2 acquisition PCB layout*
+*Figure 2 Annotated 2019 v2.2 acquisition PCB layout*
 
 ### Artifacts and noise removal
 
@@ -27,14 +27,14 @@ EEG signals collected with electrodes may contain EMG information from the subje
 
 Likewise, a second order Butterworth low pass filter with a cut-off frequency of 35 Hz helps insure the removal of EMG signals and other noise. 
 
-*Figure 2 High pass (0.3 Hz) and low pass (35 Hz) filters*
+*Figure 3 High pass (0.3 Hz) and low pass (35 Hz) filters*
 
 #### Notch filter 
 
 Main power line interference is one the major factors which can adversely influence the quality of the acquired EEG signal.  A notch filter was included in the design to address the mains hum of 60Hz and is configured to produce a simulated gain of about -36dB.  
 (show Figure 3, show PCB footage)
 
-Figure 3 Notch filter configuration
+*Figure 4 Notch filter configuration*
 
 ### Signal of interest isolation
 
@@ -74,7 +74,7 @@ The total cost of the board with its components is 243,87 CAN$.  The board itsel
 ## v3.3 Prototype features and components
 Our competition efforts this year yielded two EEG acquisition PCB designs.  While our main submission is aimed at correcting previous concerns and offers more than incremental improvements, we also introduce a prototype design.  The prototype proved more complex to manufacture and test than our other designs and forced us to consider enhancing our assembly methods.  Its several new components make it one of our most ambitious designs yet.
 
-Figure 6 Annotated v3.0 acquisition PCB layout
+*Figure 6 Annotated v3.0 acquisition PCB layout*
 
 ### Common mode chokes 
 
