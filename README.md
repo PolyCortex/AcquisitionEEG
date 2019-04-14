@@ -52,8 +52,13 @@ To insure communication between the circuit and the visualisation software, the 
 
 ### Other Components
 
-Power supply In previous version of the EEG acquisition circuit, the op-amps were supplied with 5 V and saturation was observed while gathering EEG data. Instead of decreasing the overall gain of the circuit, PolyCortex decided to increase the power supplying the circuit. The net positive power supply of the circuit was thus set to 9 V and the negative power supply to -9 V since the board is powered with 9 V batteries.
-Protections Since the performance of the board is to be evaluated on a on true EEG signals, a protection circuit component was added between the electrodes and the analog processing section of the circuit. A 4-channel bi-directional Transient Voltage Suppressor (TVS) diode array was chosen for its low leakage current which insures the precision of analog measurements. It offers protection for currents exceeding 3.0 A.
+#### Power supply 
+
+In previous version of the EEG acquisition circuit, the op-amps were supplied with 5 V and saturation was observed while gathering EEG data. Instead of decreasing the overall gain of the circuit, PolyCortex decided to increase the power supplying the circuit. The net positive power supply of the circuit was thus set to 9 V and the negative power supply to -9 V since the board is powered with 9 V batteries.
+
+#### Protections 
+
+Since the performance of the board is to be evaluated on a on true EEG signals, a protection circuit component was added between the electrodes and the analog processing section of the circuit. A 4-channel bi-directional Transient Voltage Suppressor (TVS) diode array was chosen for its low leakage current which insures the precision of analog measurements. It offers protection for currents exceeding 3.0 A.
 
 ### Simulation
 
