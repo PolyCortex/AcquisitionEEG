@@ -1,2 +1,2 @@
-# FixedChallenge2019_Elec
-Conception du Schematics et Layout de la carte EEG 2019 
+# AcquisitionEEG
+Acquisition PCB design files and documentation including software summary
