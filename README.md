@@ -1,2 +1,112 @@
-# AcquisitionEEG
-Acquisition PCB design files and documentation including software summary
+# Project Summary
+
+## Introduction
+
+Before the activity of the brain can even begin to be decoded or interpreted, a fundamental step of EEG consists of gathering bio-signals from the scalp using electrodes and guiding those signals through a series of hardware and software processing.  Our latest fully home-made acquisition pipeline for EEG-signals builds upon our previous designs.  It features a significantly optimised 4-channel acquisition printed circuit board, as well as a python-based, fully-redesigned real-time EEG visualization and processing software which allows stunning frequency bands power characterization, data storage and much more. A detailed description of the project is provided in the ‘Circuit and software design.docx’ file.  All software files are open-source and can be found on the following github page: https://github.com/AlexandreMarcotte/PolyCortex_Gui.
+
+### Notch and ADC PCBs
+Advanced software and electrical design can require skills acquired over several years of study and experience.  This past year, skill transfer activities yielded the production of two simpler PCBs, each one incorporating key components of a complete EEG acquisition board. 
+
+*Figure 1 Notch and ADC PCB layouts*
+
+The simpler PCB layouts help highlight some of the underlying core elements needed to move on to more complex designs.  More importantly, the ADC PCB proved instrumental in testing and preparing our software for interfacing with our 4-channel acquisition PCB prior to its own completion. 
+
+## v2.2 Acquisition PCB
+
+Several new components and features were added to perfect our pipeline’s analog signal processing capabilities.
+
+*Figure 4 Annotated 2019 v2.2 acquisition PCB layout*
+
+### Artifacts and noise removal
+
+#### High pass filter 
+
+EEG signals collected with electrodes may contain EMG information from the subject’s muscular activity and ECG signals from the polarizing cycles of heart cells. Towards preserving all relevant EEG information, it was decided to only maintain signals within a bandwidth ranging from 0.3 to 35 Hz.  In order to achieve the desired bandpass filtering needs, the first filtering stage consists of a second order Butterworth high pass filter.
+
+#### Low pass filter 
+
+Likewise, a second order Butterworth low pass filter with a cut-off frequency of 35 Hz helps insure the removal of EMG signals and other noise. 
+
+*Figure 2 High pass (0.3 Hz) and low pass (35 Hz) filters*
+
+#### Notch filter 
+
+Main power line interference is one the major factors which can adversely influence the quality of the acquired EEG signal.  A notch filter was included in the design to address the mains hum of 60Hz and is configured to produce a simulated gain of about -36dB.  
+(show Figure 3, show PCB footage)
+
+Figure 3 Notch filter configuration
+
+### Signal of interest isolation
+
+#### Instrumentation amplifier 
+
+Electrical signals measured on the scalp have weak amplitudes in the order of microvolts (μV).  Therefore, acquiring and visualizing EEG signals requires thousand-fold amplification. Placed directly after the electrodes input, an instrumentation amplifier provides the signal with an initial gain before it is being filtered. The amplifier is a high performance, low power, rail-to-rail precision amplifier providing a gain of approximately 40.
+
+#### Operational amplifiers 
+
+The operational amplifiers used in the high and low pass filters’ configuration allow each filter to provide an additional gain of 8.9.  After the signal has made its way through the instrumentation amplifier and the filtering levels, it is amplified a final time with a non-inverting operational amplifier offering a gain of 12.8.  The total gain produced by the cascading of the instrumentation amplifier, the high pass and low pass filters and the non-inverter is thereby the multiplication of each individual gain, producing a final gain of approximately 41,100.
+
+#### ADC 
+
+To insure communication between the circuit and the visualisation software, the voltage of the four channels must be converted from analog to digital.  The ADC was selected for its 4-channel input, its high sampling rate and its significant common-mode rejection ratio.  The output of the ADC is directed to an Arduino Uno R3 microcontroller, so that it can then be imported into our python-based software.  
+
+### Other Components
+
+Power supply In previous version of the EEG acquisition circuit, the op-amps were supplied with 5 V and saturation was observed while gathering EEG data. Instead of decreasing the overall gain of the circuit, PolyCortex decided to increase the power supplying the circuit. The net positive power supply of the circuit was thus set to 9 V and the negative power supply to -9 V since the board is powered with 9 V batteries.
+Protections Since the performance of the board is to be evaluated on a on true EEG signals, a protection circuit component was added between the electrodes and the analog processing section of the circuit. A 4-channel bi-directional Transient Voltage Suppressor (TVS) diode array was chosen for its low leakage current which insures the precision of analog measurements. It offers protection for currents exceeding 3.0 A.
+
+### Simulation
+
+To insure the circuit behaves as it should, all filtering stages were simulated with LTspice and the final amplification as well as the filtering capacities were both tested. To test the filters, AC analysis was used and allowed visualization of the circuit’s frequency response between the start and stop frequency and displaying of the Bode plot.
+Transient analysis was used to test the complete circuit over a given channel. Such an analysis allows the visualisation of the non linear transition response of the circuit in the temporal domain, much like an oscilloscope would.
+
+### Cost of board
+
+The total cost of the board with its components is 243,87 CAN$.  The board itself was ordered online from PCB Way and printed for the cost of 141,00 CAN$. The total cost of the components, which were ordered on Digi-Key Electronics, is 102,87 CAN$. 
+
+*Figure 5 Repartition of costs for board components and repartition of total cost*
+
+## v3.3 Prototype features and components
+Our competition efforts this year yielded two EEG acquisition PCB designs.  While our main submission is aimed at correcting previous concerns and offers more than incremental improvements, we also introduce a prototype design.  The prototype proved more complex to manufacture and test than our other designs and forced us to consider enhancing our assembly methods.  Its several new components make it one of our most ambitious designs yet.
+
+Figure 6 Annotated v3.0 acquisition PCB layout
+
+### Common mode chokes 
+
+The prototype circuit includes common mode chokes to eliminate a maximum of electromagnetic and radio frequency interferences from the power supply lines. The common-mode current creates a magnetic field when passing through the coil that opposes any increase of its intensity, thus blocking the common-mode current and passing differential current.
+
+### Right leg driver 
+
+A right leg driver (RLD) circuit was added to further decrease the common-mode interference.  The method provides a grounding standard by preventing the loss of voltage due to the difference in impedance between the ground electrode on the subject and the circuit itself.
+RF filter Radio frequency (RF) filters were also added to the circuit to remove high frequency (MHz-GHz) signals originating from broadcast and wireless communication which could affect the envelop of the output signal.
+
+### DC-to-DC converters 
+
+The ADC require ±2.5 V analog and digital supply. DC-to-DC converter were added to the circuit in order to transform the 9V from the battery to ±2.5V while also regulating the voltage input of the ADC.  The converters were both chosen for their input range which largely accommodate the 9 V of the battery and their voltage output suitable to power the ADC.
+
+## Acquisition software
+
+### Overview of the Software 
+
+The real-time EEG visualization software was completely redesigned as part of our Fixed Challenge submission.  The software is python-based, object-oriented, fully open-source and was originally  implemented in Linux and developed using EEG signals input from an OpenBCI cyton acquisition board (Cyton Biosensing Board).  Having been developed with input from the cyton board, the software is currently designed to accommodate up to 8 channels.  
+
+### Data transmission 
+
+With our own PCB, data is received from the connection to an Arduino Uno R3 microcontroller.  With the cyton board, data is received directly from board.  With the addition of an OpenBCI WiFiShield to the cyton board, data can be transmitted to the software wirelessly. Using the competition PCB, the sampling frequency is limited by the capabilities of the ADC which has a specified 6250 Hz sampling rate.  Using OpenBCI hardware, sampling is limited by the WiFiShield and should have the ability to reach over 2000 Hz with a high speed network switch, with a theoretical limit of 16000 Hz according to OpenBCI.
+
+### Digital signal processing 
+
+The software provides signal processing redundancy in the form of dynamic adjustable bandpass and bandstop filtering. High pass filtering from the bandpass filter stabilizes the signal so that there would not be large, slow voltage shifts over time.  The bandstop filtering effectively helps eliminate any main power line interference that has evaded analog processing.
+
+### Artificial Intelligence 
+Owing to recent development in the field of machine learning and the many signal processing opportunities that are derived from it, the software is equipped with a convolutional neural network training module.  The module was tested with EMG recorded using the cyton board, and EMG detection capability can be demonstrated through a featured signal classification-based game.
+
+### Real-time visualization 
+
+The software offers a variety of informative and pleasing visualisation options.  Of course, time and frequency domains for each channel are on display.  Also included are a graph of the evolution of individual averaged frequency bands over time.  The software also features a 3D scalp time domain EEG visualizer, and 2D and 3D spectrograms facilitating characterization of the eye closure paradigm.  While the frequency domain displays, alpha band changes over time and spectrograms allow characterization of the eye closure paradigm, the software also theoretically has the capability to be trained to recognize it.    
+
+*Figure 7 Acquisition software with OpenBCI eye closure paradigm*
+
+### Data storage format 
+
+The timeseries data can be exported as a .csv file for subsequent static analysis. A conversion factor which depends on the hardware used is applied to the signal data to recover initial pre-processed signal voltage values.
