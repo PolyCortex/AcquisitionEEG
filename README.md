@@ -31,8 +31,7 @@ Likewise, a second order Butterworth low pass filter with a cut-off frequency of
 
 #### Notch filter 
 
-Main power line interference is one the major factors which can adversely influence the quality of the acquired EEG signal.  A notch filter was included in the design to address the mains hum of 60Hz and is configured to produce a simulated gain of about -36dB.  
-(show Figure 3, show PCB footage)
+Main power line interference is one the major factors which can adversely influence the quality of the acquired EEG signal.  A notch filter was included in the design to address the mains hum of 60Hz and is configured to produce a simulated gain of about -36dB.
 
 *Figure 4 Notch filter configuration*
 
