@@ -57,7 +57,7 @@ To insure communication between the circuit and the visualisation software, the 
 
 *Figure 5 2019 v2.2 acquisition PCB connection to  Arduino Uno R3 microcontroller*
 
-### Other Components
+### Other components
 
 #### Power supply 
 
@@ -106,7 +106,7 @@ The ADC require ±2.5 V analog and digital supply. DC-to-DC converter were added
 
 ## Acquisition software
 
-### Overview of the Software 
+### Overview of the software 
 
 The real-time EEG visualization software was completely redesigned as part of our Fixed Challenge submission.  The software is python-based, object-oriented, fully open-source and was originally  implemented in Linux and developed using EEG signals input from an OpenBCI cyton acquisition board (Cyton Biosensing Board).  Having been developed with input from the cyton board, the software is currently designed to accommodate up to 8 channels.  
 
@@ -126,7 +126,7 @@ The software provides signal processing redundancy in the form of dynamic adjust
 
 *Figure 10 Dynamic adjustable bandstop filter, before (left) and after (right) application to mains hum*
 
-### Artificial Intelligence 
+### Artificial intelligence 
 Owing to recent development in the field of machine learning and the many signal processing opportunities that are derived from it, the software is equipped with a convolutional neural network training module.  The module was tested with EMG recorded using the cyton board, and EMG detection capability can be demonstrated through a featured signal classification-based game.
 
 ![jhghgdfjhgdfdfgsdsasdfffffj](https://user-images.githubusercontent.com/35876258/56102216-a931ed80-5ef9-11e9-8398-086b048e2e06.png)
