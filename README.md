@@ -37,17 +37,17 @@ EEG signals collected with electrodes may contain EMG information from the subje
 
 #### Notch filter 
 
-Main power line interference is one the major factors which can adversely influence the quality of the acquired EEG signal.  A notch filter was included in the design to address the mains hum of 60Hz and is configured to produce a simulated gain of about -36dB.
+Main power line interference is one the major factors which can adversely influence the quality of the acquired EEG signal.  A notch filter was included in the design to address the mains hum of 60Hz and is configured to produce a simulated gain of about -30dB.
 
 ### Signal of interest isolation
 
 #### Instrumentation amplifier 
 
-Electrical signals measured on the scalp have weak amplitudes in the order of microvolts (μV).  Therefore, acquiring and visualizing EEG signals requires thousand-fold amplification. Placed directly after the electrodes input, an instrumentation amplifier provides the signal with an initial gain before it is being filtered. The amplifier is a high performance, low power, rail-to-rail precision amplifier providing a gain of approximately 40.
+Electrical signals measured on the scalp have weak amplitudes in the order of microvolts (μV).  Therefore, acquiring and visualizing EEG signals requires thousand-fold amplification. Placed directly after the electrodes input, an instrumentation amplifier provides the signal with an initial gain before it is being filtered. The amplifier is a high performance, low power, rail-to-rail precision amplifier providing a gain of approximately 398.
 
 #### Operational amplifiers 
 
-The operational amplifiers used in the high and low pass filters’ configuration allow each filter to provide an additional gain of 8.9.  After the signal has made its way through the instrumentation amplifier and the filtering levels, it is amplified a final time with a non-inverting operational amplifier offering a gain of 12.8.  The total gain produced by the cascading of the instrumentation amplifier, the high pass and low pass filters and the non-inverter is thereby the multiplication of each individual gain, producing a final gain of approximately 41,100.
+After the signal has made its way through the instrumentation amplifier and the filtering levels, it is amplified a final time with a non-inverting operational amplifier offering a gain of 119.  The total gain produced by the cascading of the instrumentation amplifier and the non-inverter is thereby the multiplication of each individual gain, producing a final gain of approximately 47,400.
 
 #### ADC 
 
