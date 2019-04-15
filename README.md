@@ -7,7 +7,13 @@ Before the activity of the brain can even begin to be decoded or interpreted, a 
 ### Notch and ADC PCBs
 Advanced software and electrical design can require skills acquired over several years of study and experience.  This past year, skill transfer activities yielded the production of two simpler PCBs, each one incorporating key components of a complete EEG acquisition board. 
 
+![Figure 1](https://user-images.githubusercontent.com/35876258/56101598-7f75c800-5ef3-11e9-80c6-56e74dda86fd.png)
+
 *Figure 1 Notch and ADC PCB layouts*
+
+![notch](https://user-images.githubusercontent.com/35876258/56101627-d7acca00-5ef3-11e9-9b5f-3249470c108c.png)
+
+*Figure 2 Notch PCB soldering*
 
 The simpler PCB layouts help highlight some of the underlying core elements needed to move on to more complex designs.  More importantly, the ADC PCB proved instrumental in testing and preparing our software for interfacing with our 4-channel acquisition PCB prior to its own completion. 
 
@@ -15,25 +21,19 @@ The simpler PCB layouts help highlight some of the underlying core elements need
 
 Several new components and features were added to perfect our pipeline’s analog signal processing capabilities.
 
-*Figure 2 Annotated 2019 v2.2 acquisition PCB layout*
+![Figure 4](https://user-images.githubusercontent.com/35876258/56101642-0d51b300-5ef4-11e9-97e7-ff08c8ffdda1.png)
+
+*Figure 3 Annotated 2019 v2.2 acquisition PCB layout*
 
 ### Artifacts and noise removal
 
-#### High pass filter 
+#### High pass and low pass filters 
 
-EEG signals collected with electrodes may contain EMG information from the subject’s muscular activity and ECG signals from the polarizing cycles of heart cells. Towards preserving all relevant EEG information, it was decided to only maintain signals within a bandwidth ranging from 0.3 to 35 Hz.  In order to achieve the desired bandpass filtering needs, the first filtering stage consists of a second order Butterworth high pass filter.
-
-#### Low pass filter 
-
-Likewise, a second order Butterworth low pass filter with a cut-off frequency of 35 Hz helps insure the removal of EMG signals and other noise. 
-
-*Figure 3 High pass (0.3 Hz) and low pass (35 Hz) filters*
+EEG signals collected with electrodes may contain EMG information from the subject’s muscular activity and ECG signals from the polarizing cycles of heart cells. Towards preserving all relevant EEG information, it was decided to only maintain signals within a bandwidth ranging from 0.3 to 35 Hz.  In order to achieve the desired bandpass filtering needs, the first filtering stage consists of a second order Butterworth high pass filter.  Likewise, a second order Butterworth low pass filter with a cut-off frequency of 35 Hz helps insure the removal of EMG signals and other noise. 
 
 #### Notch filter 
 
 Main power line interference is one the major factors which can adversely influence the quality of the acquired EEG signal.  A notch filter was included in the design to address the mains hum of 60Hz and is configured to produce a simulated gain of about -36dB.
-
-*Figure 4 Notch filter configuration*
 
 ### Signal of interest isolation
 
@@ -48,6 +48,10 @@ The operational amplifiers used in the high and low pass filters’ configuratio
 #### ADC 
 
 To insure communication between the circuit and the visualisation software, the voltage of the four channels must be converted from analog to digital.  The ADC was selected for its 4-channel input, its high sampling rate and its significant common-mode rejection ratio.  The output of the ADC is directed to an Arduino Uno R3 microcontroller, so that it can then be imported into our python-based software.  
+
+![sadsd](https://user-images.githubusercontent.com/35876258/56101675-61f52e00-5ef4-11e9-952d-485851c85c2d.png)
+
+*Figure 4 2019 v2.2 acquisition PCB connection to  Arduino Uno R3 microcontroller*
 
 ### Other Components
 
@@ -68,10 +72,14 @@ Transient analysis was used to test the complete circuit over a given channel. S
 
 The total cost of the board with its components is 243,87 CAN$.  The board itself was ordered online from PCB Way and printed for the cost of 141,00 CAN$. The total cost of the components, which were ordered on Digi-Key Electronics, is 102,87 CAN$. 
 
+![Figure 5](https://user-images.githubusercontent.com/35876258/56101699-aed90480-5ef4-11e9-863b-2488a005e2d4.png)
+
 *Figure 5 Repartition of costs for board components and repartition of total cost*
 
 ## v3.3 Prototype features and components
 Our competition efforts this year yielded two EEG acquisition PCB designs.  While our main submission is aimed at correcting previous concerns and offers more than incremental improvements, we also introduce a prototype design.  The prototype proved more complex to manufacture and test than our other designs and forced us to consider enhancing our assembly methods.  Its several new components make it one of our most ambitious designs yet.
+
+![Figure 6](https://user-images.githubusercontent.com/35876258/56101714-cdd79680-5ef4-11e9-8ee7-1041ae1085ec.png)
 
 *Figure 6 Annotated v3.0 acquisition PCB layout*
 
@@ -108,8 +116,6 @@ Owing to recent development in the field of machine learning and the many signal
 ### Real-time visualization 
 
 The software offers a variety of informative and pleasing visualisation options.  Of course, time and frequency domains for each channel are on display.  Also included are a graph of the evolution of individual averaged frequency bands over time.  The software also features a 3D scalp time domain EEG visualizer, and 2D and 3D spectrograms facilitating characterization of the eye closure paradigm.  While the frequency domain displays, alpha band changes over time and spectrograms allow characterization of the eye closure paradigm, the software also theoretically has the capability to be trained to recognize it.    
-
-*Figure 7 Acquisition software with OpenBCI eye closure paradigm*
 
 ### Data storage format 
 
