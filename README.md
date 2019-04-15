@@ -89,7 +89,7 @@ Our competition efforts this year yielded two EEG acquisition PCB designs.  Whil
 
 ![asddsasdasd](https://user-images.githubusercontent.com/35876258/56101902-83571980-5ef6-11e9-9b94-49fc7b02486d.png)
 
-*Figure 8 v3.0 acquisition PCB reflow soldering*
+*Figure 8 v3.0 acquisition PCB reflow soldering (**Remerciements à Nicolas Hazboun et à la société technique METIS pour l’aide indispensable, l’utilisation d’équipements, et les précieux conseils**)*
 
 ### Common mode chokes 
 
