@@ -114,16 +114,32 @@ The real-time EEG visualization software was completely redesigned as part of ou
 
 With our own PCB, data is received from the connection to an Arduino Uno R3 microcontroller.  With the cyton board, data is received directly from board.  With the addition of an OpenBCI WiFiShield to the cyton board, data can be transmitted to the software wirelessly. Using the competition PCB, the sampling frequency is limited by the capabilities of the ADC which has a specified 6250 Hz sampling rate.  Using OpenBCI hardware, sampling is limited by the WiFiShield and should have the ability to reach over 2000 Hz with a high speed network switch, with a theoretical limit of 16000 Hz according to OpenBCI.
 
+![jhghgdfjhgdfdfghj](https://user-images.githubusercontent.com/35876258/56102146-e5b11980-5ef8-11e9-9a57-15f1fcb05150.png)
+
+*Figure 9 Software with EEG data transmission from v2.2 acquisition PCB*
+
 ### Digital signal processing 
 
 The software provides signal processing redundancy in the form of dynamic adjustable bandpass and bandstop filtering. High pass filtering from the bandpass filter stabilizes the signal so that there would not be large, slow voltage shifts over time.  The bandstop filtering effectively helps eliminate any main power line interference that has evaded analog processing.
 
+![jhghgdfjhgdfdfgfffffj](https://user-images.githubusercontent.com/35876258/56102207-91f30000-5ef9-11e9-8fd7-5e7fe77070ce.png)
+
+*Figure 10 Dynamic adjustable bandstop filter, before (left) and after (right) application to mains hum*
+
 ### Artificial Intelligence 
 Owing to recent development in the field of machine learning and the many signal processing opportunities that are derived from it, the software is equipped with a convolutional neural network training module.  The module was tested with EMG recorded using the cyton board, and EMG detection capability can be demonstrated through a featured signal classification-based game.
+
+![jhghgdfjhgdfdfgsdsasdfffffj](https://user-images.githubusercontent.com/35876258/56102216-a931ed80-5ef9-11e9-8398-086b048e2e06.png)
+
+*Figure 11 Acquisition software machine learning trainer interface*
 
 ### Real-time visualization 
 
 The software offers a variety of informative and pleasing visualisation options.  Of course, time and frequency domains for each channel are on display.  Also included are a graph of the evolution of individual averaged frequency bands over time.  The software also features a 3D scalp time domain EEG visualizer, and 2D and 3D spectrograms facilitating characterization of the eye closure paradigm.  While the frequency domain displays, alpha band changes over time and spectrograms allow characterization of the eye closure paradigm, the software also theoretically has the capability to be trained to recognize it.    
+
+![jhghgdfjhgdfdfgsdsasdasssdffffj](https://user-images.githubusercontent.com/35876258/56102222-b9e26380-5ef9-11e9-8edb-ab2a8fca093d.png)
+
+*Figure 12 Acquisition software interface live 3D spectrogram*
 
 ### Data storage format 
 
