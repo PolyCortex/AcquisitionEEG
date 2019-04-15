@@ -15,7 +15,11 @@ Advanced software and electrical design can require skills acquired over several
 
 *Figure 2 Notch PCB soldering*
 
-The simpler PCB layouts help highlight some of the underlying core elements needed to move on to more complex designs.  More importantly, the ADC PCB proved instrumental in testing and preparing our software for interfacing with our 4-channel acquisition PCB prior to its own completion. 
+The simpler PCB layouts help highlight some of the underlying core elements needed to move on to more complex designs.  More importantly, the ADC PCB proved instrumental in testing and preparing our software for interfacing with our 4-channel acquisition PCB prior to its own completion.
+
+![asdaed](https://user-images.githubusercontent.com/35876258/56101804-ad5c0c00-5ef5-11e9-8b6b-a8d3531bbd7b.png)
+
+*Figure 3 ADC PCB combined with Arduino Uno R3 microcontroller*
 
 ## v2.2 Acquisition PCB
 
@@ -23,7 +27,7 @@ Several new components and features were added to perfect our pipeline’s analo
 
 ![Figure 4](https://user-images.githubusercontent.com/35876258/56101642-0d51b300-5ef4-11e9-97e7-ff08c8ffdda1.png)
 
-*Figure 3 Annotated 2019 v2.2 acquisition PCB layout*
+*Figure 4 Annotated 2019 v2.2 acquisition PCB layout*
 
 ### Artifacts and noise removal
 
@@ -51,7 +55,7 @@ To insure communication between the circuit and the visualisation software, the 
 
 ![sadsd](https://user-images.githubusercontent.com/35876258/56101675-61f52e00-5ef4-11e9-952d-485851c85c2d.png)
 
-*Figure 4 2019 v2.2 acquisition PCB connection to  Arduino Uno R3 microcontroller*
+*Figure 5 2019 v2.2 acquisition PCB connection to  Arduino Uno R3 microcontroller*
 
 ### Other Components
 
@@ -74,14 +78,18 @@ The total cost of the board with its components is 243,87 CAN$.  The board itsel
 
 ![Figure 5](https://user-images.githubusercontent.com/35876258/56101699-aed90480-5ef4-11e9-863b-2488a005e2d4.png)
 
-*Figure 5 Repartition of costs for board components and repartition of total cost*
+*Figure 6 Repartition of costs for board components and repartition of total cost*
 
 ## v3.3 Prototype features and components
 Our competition efforts this year yielded two EEG acquisition PCB designs.  While our main submission is aimed at correcting previous concerns and offers more than incremental improvements, we also introduce a prototype design.  The prototype proved more complex to manufacture and test than our other designs and forced us to consider enhancing our assembly methods.  Its several new components make it one of our most ambitious designs yet.
 
 ![Figure 6](https://user-images.githubusercontent.com/35876258/56101714-cdd79680-5ef4-11e9-8ee7-1041ae1085ec.png)
 
-*Figure 6 Annotated v3.0 acquisition PCB layout*
+*Figure 7 Annotated v3.0 acquisition PCB layout*
+
+![asddsasdasd](https://user-images.githubusercontent.com/35876258/56101902-83571980-5ef6-11e9-9b94-49fc7b02486d.png)
+
+*Figure 8 v3.0 acquisition PCB reflow soldering*
 
 ### Common mode chokes 
 
