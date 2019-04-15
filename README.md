@@ -80,7 +80,7 @@ The total cost of the board with its components is 243,87 CAN$.  The board itsel
 
 *Figure 6 Repartition of costs for board components and repartition of total cost*
 
-## v3.3 Prototype features and components
+## v3.0 Prototype features and components
 Our competition efforts this year yielded two EEG acquisition PCB designs.  While our main submission is aimed at correcting previous concerns and offers more than incremental improvements, we also introduce a prototype design.  The prototype proved more complex to manufacture and test than our other designs and forced us to consider enhancing our assembly methods.  Its several new components make it one of our most ambitious designs yet.
 
 ![Figure 6](https://user-images.githubusercontent.com/35876258/56101714-cdd79680-5ef4-11e9-8ee7-1041ae1085ec.png)
